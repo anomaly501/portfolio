@@ -1,0 +1,397 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Space+Grotesk%3Awght%40400%3B500%3B700"
+    />
+
+    <title>Stitch Design</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#111518] dark group/design-root overflow-x-hidden" style='font-family: "Space Grotesk", "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#283139] px-10 py-3">
+          <div class="flex items-center gap-4 text-white">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_6_330)">
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z"
+                    fill="currentColor"
+                  ></path>
+                </g>
+                <defs>
+                  <clipPath id="clip0_6_330"><rect width="48" height="48" fill="white"></rect></clipPath>
+                </defs>
+              </svg>
+            </div>
+            <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Alex's Portfolio</h2>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <div class="flex items-center gap-9">
+              <a class="text-white text-sm font-medium leading-normal" href="#">About</a>
+              <a class="text-white text-sm font-medium leading-normal" href="#">Projects</a>
+              <a class="text-white text-sm font-medium leading-normal" href="#">Blog</a>
+              <a class="text-white text-sm font-medium leading-normal" href="#">Contact</a>
+            </div>
+            <button
+              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#283139] text-white text-sm font-bold leading-normal tracking-[0.015em]"
+            >
+              <span class="truncate">Resume</span>
+            </button>
+          </div>
+        </header>
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="@container">
+              <div class="@[480px]:p-4">
+                <div
+                  class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-lg items-center justify-center p-4"
+                  style='background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCjXeFvMXEmR3-wGzssx9YD6Yp6bnwlGIAEaRBidoYZmUR9-lQ0WgX9oCIRRydYHtjA0IZq6zjDb8jiBv3n5-pFBaT4aT58T5eb9c8iWqVjOg3thwiuBMwMsA6TOqMrx7hzU8DyuJ7UKFyQSoUOZGYIQUJoObkcytBU3KkuP2WgnS3I9bHT8vpY23YyzaOmw-_yTdQss8ZU12cDPfDn5JYHkukqncxW39X2qd-pCzRMouNq3pbuyEXDevAAKEbWN69SeiAGmPrMq6QJ");'
+                >
+                  <div class="flex flex-col gap-2 text-center">
+                    <h1
+                      class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
+                    >
+                      Engineering the Future of Connectivity
+                    </h1>
+                    <h2 class="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
+                      A Computer Science and Engineering student specializing in IoT, passionate about creating innovative solutions that bridge the digital and physical worlds.
+                    </h2>
+                  </div>
+                  <div class="flex-wrap gap-3 flex justify-center">
+                    <button
+                      class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#2496f3] text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]"
+                    >
+                      <span class="truncate">View Projects</span>
+                    </button>
+                    <button
+                      class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#283139] text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]"
+                    >
+                      <span class="truncate">Contact Me</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">About Me</h2>
+            <div class="grid grid-cols-[40px_1fr] gap-x-2 px-4">
+              <div class="flex flex-col items-center gap-1 pt-3">
+                <div class="text-white" data-icon="TextHThree" data-size="24px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M152,56V176a8,8,0,0,1-16,0V124H48v52a8,8,0,0,1-16,0V56a8,8,0,0,1,16,0v52h88V56a8,8,0,0,1,16,0Zm73.52,90.63,21-30A8,8,0,0,0,240,104H192a8,8,0,0,0,0,16h32.63l-19.18,27.41A8,8,0,0,0,212,160a20,20,0,1,1-14.29,34,8,8,0,1,0-11.42,11.19A36,36,0,0,0,248,180,36.07,36.07,0,0,0,225.52,146.63Z"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="w-[1.5px] bg-[#3b4954] h-2 grow"></div>
+              </div>
+              <div class="flex flex-1 flex-col py-3">
+                <p class="text-white text-base font-medium leading-normal">B.Tech in Computer Science and Engineering (IoT Specialization)</p>
+                <p class="text-[#9cacba] text-base font-normal leading-normal">2020 - 2024</p>
+              </div>
+              <div class="flex flex-col items-center gap-1">
+                <div class="w-[1.5px] bg-[#3b4954] h-2"></div>
+                <div class="text-white" data-icon="TextHThree" data-size="24px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M152,56V176a8,8,0,0,1-16,0V124H48v52a8,8,0,0,1-16,0V56a8,8,0,0,1,16,0v52h88V56a8,8,0,0,1,16,0Zm73.52,90.63,21-30A8,8,0,0,0,240,104H192a8,8,0,0,0,0,16h32.63l-19.18,27.41A8,8,0,0,0,212,160a20,20,0,1,1-14.29,34,8,8,0,1,0-11.42,11.19A36,36,0,0,0,248,180,36.07,36.07,0,0,0,225.52,146.63Z"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="w-[1.5px] bg-[#3b4954] h-2 grow"></div>
+              </div>
+              <div class="flex flex-1 flex-col py-3">
+                <p class="text-white text-base font-medium leading-normal">IoT and Embedded Systems Intern</p>
+                <p class="text-[#9cacba] text-base font-normal leading-normal">Summer 2023</p>
+              </div>
+              <div class="flex flex-col items-center gap-1 pb-3">
+                <div class="w-[1.5px] bg-[#3b4954] h-2"></div>
+                <div class="text-white" data-icon="TextHThree" data-size="24px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M152,56V176a8,8,0,0,1-16,0V124H48v52a8,8,0,0,1-16,0V56a8,8,0,0,1,16,0v52h88V56a8,8,0,0,1,16,0Zm73.52,90.63,21-30A8,8,0,0,0,240,104H192a8,8,0,0,0,0,16h32.63l-19.18,27.41A8,8,0,0,0,212,160a20,20,0,1,1-14.29,34,8,8,0,1,0-11.42,11.19A36,36,0,0,0,248,180,36.07,36.07,0,0,0,225.52,146.63Z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="flex flex-1 flex-col py-3">
+                <p class="text-white text-base font-medium leading-normal">IoT Project Lead</p>
+                <p class="text-[#9cacba] text-base font-normal leading-normal">2023 - Present</p>
+              </div>
+            </div>
+            <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Skills</h2>
+            <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
+              <div class="flex flex-1 gap-3 rounded-lg border border-[#3b4954] bg-[#1b2227] p-4 items-center">
+                <div class="text-white" data-icon="CodepenLogo" data-size="24px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M235.79,89l-104-56a8,8,0,0,0-7.58,0l-104,56A8,8,0,0,0,16,96v64a8,8,0,0,0,4.21,7.05l104,56a8,8,0,0,0,7.58,0l104-56A8,8,0,0,0,240,160V96A8,8,0,0,0,235.79,89ZM224,146.61,189.45,128,224,109.39Zm-51.43-27.7L136,99.22V53.39L215.13,96Zm-44.57,24L100.3,128,128,113.09,155.7,128Zm-8-89.52V99.22L83.43,118.91,40.87,96Zm-88,56L66.55,128,32,146.61Zm51.43,27.7L120,156.78v45.83L40.87,160ZM136,202.61V156.78l36.57-19.69L215.13,160Z"
+                    ></path>
+                  </svg>
+                </div>
+                <h2 class="text-white text-base font-bold leading-tight">Python</h2>
+              </div>
+              <div class="flex flex-1 gap-3 rounded-lg border border-[#3b4954] bg-[#1b2227] p-4 items-center">
+                <div class="text-white" data-icon="PokerChip" data-size="24px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,152a48,48,0,1,1,48-48A48.05,48.05,0,0,1,128,176Zm39.21-98.53a63.66,63.66,0,0,0-31.21-13V40.37a87.6,87.6,0,0,1,48.28,20ZM120,64.52a63.66,63.66,0,0,0-31.21,13L71.72,60.4a87.6,87.6,0,0,1,48.28-20ZM77.47,88.79a63.66,63.66,0,0,0-13,31.21H40.37a87.6,87.6,0,0,1,20-48.28ZM64.52,136a63.66,63.66,0,0,0,13,31.21L60.4,184.28a87.6,87.6,0,0,1-20-48.28Zm24.27,42.53A63.66,63.66,0,0,0,120,191.48v24.15a87.6,87.6,0,0,1-48.28-20ZM136,191.48a63.66,63.66,0,0,0,31.21-12.95l17.07,17.07a87.6,87.6,0,0,1-48.28,20Zm42.53-24.27A63.66,63.66,0,0,0,191.48,136h24.15a87.6,87.6,0,0,1-20,48.28ZM191.48,120a63.66,63.66,0,0,0-12.95-31.21L195.6,71.72a87.6,87.6,0,0,1,20,48.28Z"
+                    ></path>
+                  </svg>
+                </div>
+                <h2 class="text-white text-base font-bold leading-tight">Embedded Systems</h2>
+              </div>
+              <div class="flex flex-1 gap-3 rounded-lg border border-[#3b4954] bg-[#1b2227] p-4 items-center">
+                <div class="text-white" data-icon="LinuxLogo" data-size="24px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M229,222.25A8,8,0,0,1,217.76,221C216.39,219.27,184,177.86,184,96A56,56,0,0,0,72,96c0,81.86-32.37,123.27-33.75,125a8,8,0,0,1-12.51-10c.15-.2,7.69-9.9,15.13-28.74C47.77,164.8,56,135.64,56,96a72,72,0,0,1,144,0c0,39.64,8.23,68.8,15.13,86.28,7.48,18.94,15.06,28.64,15.14,28.74A8,8,0,0,1,229,222.25ZM100,96a12,12,0,1,0,12,12A12,12,0,0,0,100,96Zm68,12a12,12,0,1,0-12,12A12,12,0,0,0,168,108ZM99.58,136.84a8,8,0,0,0-7.15,14.31l32,16a7.94,7.94,0,0,0,7.15,0l32-16a8,8,0,0,0-7.16-14.31L128,151.05ZM128,184a54.07,54.07,0,0,0-47,28.11,8,8,0,1,0,14,7.78,37.35,37.35,0,0,1,66,0,8,8,0,0,0,14-7.78A54.07,54.07,0,0,0,128,184Z"
+                    ></path>
+                  </svg>
+                </div>
+                <h2 class="text-white text-base font-bold leading-tight">Raspberry Pi</h2>
+              </div>
+              <div class="flex flex-1 gap-3 rounded-lg border border-[#3b4954] bg-[#1b2227] p-4 items-center">
+                <div class="text-white" data-icon="AndroidLogo" data-size="24px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M176,156a12,12,0,1,1-12-12A12,12,0,0,1,176,156ZM92,144a12,12,0,1,0,12,12A12,12,0,0,0,92,144Zm148,24v24a16,16,0,0,1-16,16H32a16,16,0,0,1-16-16V169.13A113.38,113.38,0,0,1,51.4,86.72L26.34,61.66A8,8,0,0,1,37.66,50.34L63.82,76.5a111.43,111.43,0,0,1,128.55-.19l26-26a8,8,0,0,1,11.32,11.32L204.82,86.5c.75.71,1.5,1.43,2.24,2.17A111.25,111.25,0,0,1,240,168Zm-16,0a96,96,0,0,0-96-96h-.34C74.91,72.18,32,115.75,32,169.13V192H224Z"
+                    ></path>
+                  </svg>
+                </div>
+                <h2 class="text-white text-base font-bold leading-tight">Arduino</h2>
+              </div>
+              <div class="flex flex-1 gap-3 rounded-lg border border-[#3b4954] bg-[#1b2227] p-4 items-center">
+                <div class="text-white" data-icon="Cloud" data-size="24px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M160,40A88.09,88.09,0,0,0,81.29,88.67,64,64,0,1,0,72,216h88a88,88,0,0,0,0-176Zm0,160H72a48,48,0,0,1,0-96c1.1,0,2.2,0,3.29.11A88,88,0,0,0,72,128a8,8,0,0,0,16,0,72,72,0,1,1,72,72Z"
+                    ></path>
+                  </svg>
+                </div>
+                <h2 class="text-white text-base font-bold leading-tight">Cloud Computing</h2>
+              </div>
+              <div class="flex flex-1 gap-3 rounded-lg border border-[#3b4954] bg-[#1b2227] p-4 items-center">
+                <div class="text-white" data-icon="Database" data-size="24px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M128,24C74.17,24,32,48.6,32,80v96c0,31.4,42.17,56,96,56s96-24.6,96-56V80C224,48.6,181.83,24,128,24Zm80,104c0,9.62-7.88,19.43-21.61,26.92C170.93,163.35,150.19,168,128,168s-42.93-4.65-58.39-13.08C55.88,147.43,48,137.62,48,128V111.36c17.06,15,46.23,24.64,80,24.64s62.94-9.68,80-24.64ZM69.61,53.08C85.07,44.65,105.81,40,128,40s42.93,4.65,58.39,13.08C200.12,60.57,208,70.38,208,80s-7.88,19.43-21.61,26.92C170.93,115.35,150.19,120,128,120s-42.93-4.65-58.39-13.08C55.88,99.43,48,89.62,48,80S55.88,60.57,69.61,53.08ZM186.39,202.92C170.93,211.35,150.19,216,128,216s-42.93-4.65-58.39-13.08C55.88,195.43,48,185.62,48,176V159.36c17.06,15,46.23,24.64,80,24.64s62.94-9.68,80-24.64V176C208,185.62,200.12,195.43,186.39,202.92Z"
+                    ></path>
+                  </svg>
+                </div>
+                <h2 class="text-white text-base font-bold leading-tight">Database Management</h2>
+              </div>
+            </div>
+            <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Projects</h2>
+            <div class="flex gap-3 p-3 flex-wrap pr-4">
+              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#283139] pl-4 pr-4">
+                <p class="text-white text-sm font-medium leading-normal">All</p>
+              </div>
+              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#283139] pl-4 pr-4">
+                <p class="text-white text-sm font-medium leading-normal">IoT</p>
+              </div>
+              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#283139] pl-4 pr-4">
+                <p class="text-white text-sm font-medium leading-normal">AI</p>
+              </div>
+              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#283139] pl-4 pr-4">
+                <p class="text-white text-sm font-medium leading-normal">Web</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
+              <div class="flex flex-col gap-3 pb-3">
+                <div
+                  class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAaiMZWtOk_GFsmQzra5J77owk6xuEWOoAswqB7-_1Lc0sLrzSFhOmMjEMAtJrzHusyQkV7QdU2jj7L1NCDiv6zRNtoLuX-DxA54izOLA3296s05P8BDT-hsJrcJn5u-Bkwym4koM7NhP8Rbj8EJLoO68OZsj0WT2m4e3FgGpO56kXvrTY4I-D49jpKEdLogHvi9IzPldkdINlaY2A2ZDhMCVcx6ugSy977INktSSHO1VpAYOPEF2GQ2LXlh8MLV-XjLQPF6jbgKs0Z");'
+                ></div>
+                <div>
+                  <p class="text-white text-base font-medium leading-normal">Smart Home Automation System</p>
+                  <p class="text-[#9cacba] text-sm font-normal leading-normal">An IoT system for controlling home appliances remotely.</p>
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 pb-3">
+                <div
+                  class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBzQgpXbYOoKRwjqlgKN7TKggpgYWs9PGGhmPN-aJies6rjGB773YtOmXwOQDw8Y_ICwtTCj121eTPoPx5uLaT7hdb82wqPKlw_bMK-2nLJCD1kJPVVoBkTTGh0arIMEkjrTPaJ93lkZ1omqZHWFRpw8xLx2I9scEZCndUfTjIW7vOlmyTDksqJsuWdHWxnqZzh4K47VCt8naYbjzvnE7j8uJMB-oAWYo7c7DPJDzHyPSGtgSGQzo6Aw-mRU2mShNj3U1OulCLurfBO");'
+                ></div>
+                <div>
+                  <p class="text-white text-base font-medium leading-normal">AI-Powered Environmental Monitoring</p>
+                  <p class="text-[#9cacba] text-sm font-normal leading-normal">An AI-driven system for monitoring air quality.</p>
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 pb-3">
+                <div
+                  class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAJlij6FTDQqHzO_r3RCI3iLS3wR6G9Y_LJY7ZqAMdvT3Ajx6Jbod_z_z8QEWh2TGLnNwS59idKGzQJii62_eDiHfTq0JXVvFYEELAZOreAXlMgr2fbkAs5tK74lyF5H9icuOa0hOCmSTZGjm-4VwSHojjPoQfzx3qhR4vltBMHldp7EKKuB4Vg0vRsBaZF48370KRDyotRUffQ94bDp09URQ6433gMex4xvB233KDccCE6bvd5OVk-vZC9lSVrtHpTLX1_eeT7l6_1");'
+                ></div>
+                <div>
+                  <p class="text-white text-base font-medium leading-normal">Personal Portfolio Website</p>
+                  <p class="text-[#9cacba] text-sm font-normal leading-normal">A personal portfolio website showcasing projects and skills.</p>
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 pb-3">
+                <div
+                  class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuASYf7PqIp71TifgGsI7Z-49MpwVw1XuhV01KcMkmrdUizVhIiuude2x803y9K_y3ao2W9SP86OElwxDTPfMbbBIPeHvpbsVuSYxO2d9lsq8APPfAQh3JW2brZXJkmYl_-WOFLirUe5GfZVrvyY7yOwRFq7Ek9PV47PwTEmgE-MzF7oCpQDPBCsoOvmcvLZLqAQkr51DmiRyga7eZxtFA88BT4WjAoahLeg3IDqrBN7OMxufZW5cJifMcYl9pslCWobR2iBDetwtplI");'
+                ></div>
+                <div>
+                  <p class="text-white text-base font-medium leading-normal">Autonomous Drone Navigation</p>
+                  <p class="text-[#9cacba] text-sm font-normal leading-normal">A drone navigation system using computer vision.</p>
+                </div>
+              </div>
+            </div>
+            <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Blog</h2>
+            <div class="p-4">
+              <div class="flex items-stretch justify-between gap-4 rounded-lg">
+                <div class="flex flex-col gap-1 flex-[2_2_0px]">
+                  <p class="text-[#9cacba] text-sm font-normal leading-normal">IoT Tips</p>
+                  <p class="text-white text-base font-bold leading-tight">Optimizing Battery Life in IoT Devices</p>
+                  <p class="text-[#9cacba] text-sm font-normal leading-normal">
+                    Learn effective techniques to extend battery life in your IoT projects, covering power management strategies and hardware considerations.
+                  </p>
+                </div>
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1"></div>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="flex items-stretch justify-between gap-4 rounded-lg">
+                <div class="flex flex-col gap-1 flex-[2_2_0px]">
+                  <p class="text-[#9cacba] text-sm font-normal leading-normal">Code</p>
+                  <p class="text-white text-base font-bold leading-tight">Implementing MQTT Protocol in Python</p>
+                  <p class="text-[#9cacba] text-sm font-normal leading-normal">
+                    A step-by-step guide on using the MQTT protocol for IoT communication with Python, including code examples and best practices.
+                  </p>
+                </div>
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1"></div>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="flex items-stretch justify-between gap-4 rounded-lg">
+                <div class="flex flex-col gap-1 flex-[2_2_0px]">
+                  <p class="text-[#9cacba] text-sm font-normal leading-normal">Internships</p>
+                  <p class="text-white text-base font-bold leading-tight">Securing an IoT Internship: Tips and Strategies</p>
+                  <p class="text-[#9cacba] text-sm font-normal leading-normal">
+                    Practical advice and strategies for landing an internship in the IoT field, including resume tips, interview preparation, and networking.
+                  </p>
+                </div>
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1"></div>
+              </div>
+            </div>
+            <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Contact</h2>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-white text-base font-medium leading-normal pb-2">Name</p>
+                <input
+                  placeholder="Your Name"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#283139] focus:border-none h-14 placeholder:text-[#9cacba] p-4 text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-white text-base font-medium leading-normal pb-2">Email</p>
+                <input
+                  placeholder="Your Email"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#283139] focus:border-none h-14 placeholder:text-[#9cacba] p-4 text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-white text-base font-medium leading-normal pb-2">Message</p>
+                <textarea
+                  placeholder="Your Message"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#283139] focus:border-none min-h-36 placeholder:text-[#9cacba] p-4 text-base font-normal leading-normal"
+                ></textarea>
+              </label>
+            </div>
+            <div class="flex px-4 py-3 justify-end">
+              <button
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#2496f3] text-white text-sm font-bold leading-normal tracking-[0.015em]"
+              >
+                <span class="truncate">Send</span>
+              </button>
+            </div>
+            <div class="@container">
+              <div class="gap-2 px-4 flex flex-wrap justify-start">
+                <div class="flex flex-col items-center gap-2 bg-[#111518] py-2.5 text-center w-20">
+                  <div class="rounded-full bg-[#283139] p-2.5">
+                    <div class="text-white" data-icon="LinkedinLogo" data-size="20px" data-weight="regular">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                        <path
+                          d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"
+                        ></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <p class="text-white text-sm font-medium leading-normal">LinkedIn</p>
+                </div>
+                <div class="flex flex-col items-center gap-2 bg-[#111518] py-2.5 text-center w-20">
+                  <div class="rounded-full bg-[#283139] p-2.5">
+                    <div class="text-white" data-icon="GithubLogo" data-size="20px" data-weight="regular">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                        <path
+                          d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.72,41.72,0,0,1,200,104Z"
+                        ></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <p class="text-white text-sm font-medium leading-normal">GitHub</p>
+                </div>
+                <div class="flex flex-col items-center gap-2 bg-[#111518] py-2.5 text-center w-20">
+                  <div class="rounded-full bg-[#283139] p-2.5">
+                    <div class="text-white" data-icon="Envelope" data-size="20px" data-weight="regular">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                        <path
+                          d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48Zm-96,85.15L52.57,64H203.43ZM98.71,128,40,181.81V74.19Zm11.84,10.85,12,11.05a8,8,0,0,0,10.82,0l12-11.05,58,53.15H52.57ZM157.29,128,216,74.18V181.82Z"
+                        ></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <p class="text-white text-sm font-medium leading-normal">Email</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="flex justify-center">
+          <div class="flex max-w-[960px] flex-1 flex-col">
+            <footer class="flex flex-col gap-6 px-5 py-10 text-center @container">
+              <div class="flex flex-wrap justify-center gap-4">
+                <a href="#">
+                  <div class="text-[#9cacba]" data-icon="LinkedinLogo" data-size="24px" data-weight="regular">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"
+                      ></path>
+                    </svg>
+                  </div>
+                </a>
+                <a href="#">
+                  <div class="text-[#9cacba]" data-icon="GithubLogo" data-size="24px" data-weight="regular">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.72,41.72,0,0,1,200,104Z"
+                      ></path>
+                    </svg>
+                  </div>
+                </a>
+              </div>
+              <p class="text-[#9cacba] text-base font-normal leading-normal">© 2024 Alex Chen. All rights reserved.</p>
+            </footer>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
