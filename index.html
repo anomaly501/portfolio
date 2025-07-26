@@ -1,397 +1,979 @@
-<html>
-  <head>
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-    <link
-      rel="stylesheet"
-      as="style"
-      onload="this.rel='stylesheet'"
-      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Space+Grotesk%3Awght%40400%3B500%3B700"
-    />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrolling on the main body */
+        }
 
-    <title>Stitch Design</title>
-    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+        /* Custom scrollbar for content areas */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
 
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  </head>
-  <body>
-    <div class="relative flex size-full min-h-screen flex-col bg-[#111518] dark group/design-root overflow-x-hidden" style='font-family: "Space Grotesk", "Noto Sans", sans-serif;'>
-      <div class="layout-container flex h-full grow flex-col">
-        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#283139] px-10 py-3">
-          <div class="flex items-center gap-4 text-white">
-            <div class="size-4">
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clip-path="url(#clip0_6_330)">
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z"
-                    fill="currentColor"
-                  ></path>
-                </g>
-                <defs>
-                  <clipPath id="clip0_6_330"><rect width="48" height="48" fill="white"></rect></clipPath>
-                </defs>
-              </svg>
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Windows 10 specific styles */
+        .win10-taskbar-item:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .win10-window-header {
+            cursor: grab;
+        }
+
+        /* Android specific styles */
+        .android-app-icon:active {
+            transform: scale(0.95);
+            transition: transform 0.1s ease-out;
+        }
+
+        /* General modal overlay */
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        /* Hide specific elements based on device type */
+        .desktop-only {
+            display: none;
+        }
+        .mobile-only {
+            display: none;
+        }
+
+        /* Show desktop elements on larger screens (md and up) */
+        @media (min-width: 768px) {
+            .desktop-only {
+                display: block;
+            }
+            .mobile-only {
+                display: none;
+            }
+        }
+
+        /* Show mobile elements on smaller screens (default) */
+        @media (max-width: 767px) {
+            .desktop-only {
+                display: none;
+            }
+            .mobile-only {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-800 text-white h-screen w-screen flex flex-col">
+
+    <!-- Desktop/Tablet View (Windows 10 themed) -->
+    <div id="desktopView" class="desktop-only flex flex-col h-full w-full bg-gradient-to-br from-blue-700 to-blue-900 relative">
+        <!-- Desktop Background Image (optional, for realism) -->
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://placehold.co/1920x1080/0A2C59/FFFFFF?text=Windows+10+Desktop'); opacity: 0.7;"></div>
+
+        <!-- Desktop Icons -->
+        <div class="relative z-10 p-4 flex-grow grid grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-4 overflow-auto custom-scrollbar">
+            <!-- About App -->
+            <div class="flex flex-col items-center justify-center p-2 rounded-lg cursor-pointer hover:bg-white hover:bg-opacity-10 transition-colors duration-200" onclick="openApp('about', 'desktop')">
+                <div class="bg-blue-500 p-3 rounded-xl shadow-lg flex items-center justify-center">
+                    <i data-lucide="user" class="w-8 h-8 text-white"></i>
+                </div>
+                <span class="text-white text-sm mt-2 text-center drop-shadow-md">About Me</span>
             </div>
-            <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Alex's Portfolio</h2>
-          </div>
-          <div class="flex flex-1 justify-end gap-8">
-            <div class="flex items-center gap-9">
-              <a class="text-white text-sm font-medium leading-normal" href="#">About</a>
-              <a class="text-white text-sm font-medium leading-normal" href="#">Projects</a>
-              <a class="text-white text-sm font-medium leading-normal" href="#">Blog</a>
-              <a class="text-white text-sm font-medium leading-normal" href="#">Contact</a>
+            <!-- Projects App -->
+            <div class="flex flex-col items-center justify-center p-2 rounded-lg cursor-pointer hover:bg-white hover:bg-opacity-10 transition-colors duration-200" onclick="openApp('projects', 'desktop')">
+                <div class="bg-green-500 p-3 rounded-xl shadow-lg flex items-center justify-center">
+                    <i data-lucide="folder-git" class="w-8 h-8 text-white"></i>
+                </div>
+                <span class="text-white text-sm mt-2 text-center drop-shadow-md">Projects</span>
             </div>
-            <button
-              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#283139] text-white text-sm font-bold leading-normal tracking-[0.015em]"
-            >
-              <span class="truncate">Resume</span>
-            </button>
-          </div>
-        </header>
-        <div class="px-40 flex flex-1 justify-center py-5">
-          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-            <div class="@container">
-              <div class="@[480px]:p-4">
-                <div
-                  class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-lg items-center justify-center p-4"
-                  style='background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCjXeFvMXEmR3-wGzssx9YD6Yp6bnwlGIAEaRBidoYZmUR9-lQ0WgX9oCIRRydYHtjA0IZq6zjDb8jiBv3n5-pFBaT4aT58T5eb9c8iWqVjOg3thwiuBMwMsA6TOqMrx7hzU8DyuJ7UKFyQSoUOZGYIQUJoObkcytBU3KkuP2WgnS3I9bHT8vpY23YyzaOmw-_yTdQss8ZU12cDPfDn5JYHkukqncxW39X2qd-pCzRMouNq3pbuyEXDevAAKEbWN69SeiAGmPrMq6QJ");'
-                >
-                  <div class="flex flex-col gap-2 text-center">
-                    <h1
-                      class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
-                    >
-                      Engineering the Future of Connectivity
-                    </h1>
-                    <h2 class="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
-                      A Computer Science and Engineering student specializing in IoT, passionate about creating innovative solutions that bridge the digital and physical worlds.
-                    </h2>
-                  </div>
-                  <div class="flex-wrap gap-3 flex justify-center">
-                    <button
-                      class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#2496f3] text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]"
-                    >
-                      <span class="truncate">View Projects</span>
-                    </button>
-                    <button
-                      class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#283139] text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]"
-                    >
-                      <span class="truncate">Contact Me</span>
-                    </button>
-                  </div>
+            <!-- Experience App -->
+            <div class="flex flex-col items-center justify-center p-2 rounded-lg cursor-pointer hover:bg-white hover:bg-opacity-10 transition-colors duration-200" onclick="openApp('experience', 'desktop')">
+                <div class="bg-purple-500 p-3 rounded-xl shadow-lg flex items-center justify-center">
+                    <i data-lucide="briefcase" class="w-8 h-8 text-white"></i>
                 </div>
-              </div>
+                <span class="text-white text-sm mt-2 text-center drop-shadow-md">Experience</span>
             </div>
-            <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">About Me</h2>
-            <div class="grid grid-cols-[40px_1fr] gap-x-2 px-4">
-              <div class="flex flex-col items-center gap-1 pt-3">
-                <div class="text-white" data-icon="TextHThree" data-size="24px" data-weight="regular">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                    <path
-                      d="M152,56V176a8,8,0,0,1-16,0V124H48v52a8,8,0,0,1-16,0V56a8,8,0,0,1,16,0v52h88V56a8,8,0,0,1,16,0Zm73.52,90.63,21-30A8,8,0,0,0,240,104H192a8,8,0,0,0,0,16h32.63l-19.18,27.41A8,8,0,0,0,212,160a20,20,0,1,1-14.29,34,8,8,0,1,0-11.42,11.19A36,36,0,0,0,248,180,36.07,36.07,0,0,0,225.52,146.63Z"
-                    ></path>
-                  </svg>
+            <!-- Contact App -->
+            <div class="flex flex-col items-center justify-center p-2 rounded-lg cursor-pointer hover:bg-white hover:bg-opacity-10 transition-colors duration-200" onclick="openApp('contact', 'desktop')">
+                <div class="bg-red-500 p-3 rounded-xl shadow-lg flex items-center justify-center">
+                    <i data-lucide="mail" class="w-8 h-8 text-white"></i>
                 </div>
-                <div class="w-[1.5px] bg-[#3b4954] h-2 grow"></div>
-              </div>
-              <div class="flex flex-1 flex-col py-3">
-                <p class="text-white text-base font-medium leading-normal">B.Tech in Computer Science and Engineering (IoT Specialization)</p>
-                <p class="text-[#9cacba] text-base font-normal leading-normal">2020 - 2024</p>
-              </div>
-              <div class="flex flex-col items-center gap-1">
-                <div class="w-[1.5px] bg-[#3b4954] h-2"></div>
-                <div class="text-white" data-icon="TextHThree" data-size="24px" data-weight="regular">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                    <path
-                      d="M152,56V176a8,8,0,0,1-16,0V124H48v52a8,8,0,0,1-16,0V56a8,8,0,0,1,16,0v52h88V56a8,8,0,0,1,16,0Zm73.52,90.63,21-30A8,8,0,0,0,240,104H192a8,8,0,0,0,0,16h32.63l-19.18,27.41A8,8,0,0,0,212,160a20,20,0,1,1-14.29,34,8,8,0,1,0-11.42,11.19A36,36,0,0,0,248,180,36.07,36.07,0,0,0,225.52,146.63Z"
-                    ></path>
-                  </svg>
-                </div>
-                <div class="w-[1.5px] bg-[#3b4954] h-2 grow"></div>
-              </div>
-              <div class="flex flex-1 flex-col py-3">
-                <p class="text-white text-base font-medium leading-normal">IoT and Embedded Systems Intern</p>
-                <p class="text-[#9cacba] text-base font-normal leading-normal">Summer 2023</p>
-              </div>
-              <div class="flex flex-col items-center gap-1 pb-3">
-                <div class="w-[1.5px] bg-[#3b4954] h-2"></div>
-                <div class="text-white" data-icon="TextHThree" data-size="24px" data-weight="regular">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                    <path
-                      d="M152,56V176a8,8,0,0,1-16,0V124H48v52a8,8,0,0,1-16,0V56a8,8,0,0,1,16,0v52h88V56a8,8,0,0,1,16,0Zm73.52,90.63,21-30A8,8,0,0,0,240,104H192a8,8,0,0,0,0,16h32.63l-19.18,27.41A8,8,0,0,0,212,160a20,20,0,1,1-14.29,34,8,8,0,1,0-11.42,11.19A36,36,0,0,0,248,180,36.07,36.07,0,0,0,225.52,146.63Z"
-                    ></path>
-                  </svg>
-                </div>
-              </div>
-              <div class="flex flex-1 flex-col py-3">
-                <p class="text-white text-base font-medium leading-normal">IoT Project Lead</p>
-                <p class="text-[#9cacba] text-base font-normal leading-normal">2023 - Present</p>
-              </div>
+                <span class="text-white text-sm mt-2 text-center drop-shadow-md">Contact</span>
             </div>
-            <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Skills</h2>
-            <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
-              <div class="flex flex-1 gap-3 rounded-lg border border-[#3b4954] bg-[#1b2227] p-4 items-center">
-                <div class="text-white" data-icon="CodepenLogo" data-size="24px" data-weight="regular">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                    <path
-                      d="M235.79,89l-104-56a8,8,0,0,0-7.58,0l-104,56A8,8,0,0,0,16,96v64a8,8,0,0,0,4.21,7.05l104,56a8,8,0,0,0,7.58,0l104-56A8,8,0,0,0,240,160V96A8,8,0,0,0,235.79,89ZM224,146.61,189.45,128,224,109.39Zm-51.43-27.7L136,99.22V53.39L215.13,96Zm-44.57,24L100.3,128,128,113.09,155.7,128Zm-8-89.52V99.22L83.43,118.91,40.87,96Zm-88,56L66.55,128,32,146.61Zm51.43,27.7L120,156.78v45.83L40.87,160ZM136,202.61V156.78l36.57-19.69L215.13,160Z"
-                    ></path>
-                  </svg>
-                </div>
-                <h2 class="text-white text-base font-bold leading-tight">Python</h2>
-              </div>
-              <div class="flex flex-1 gap-3 rounded-lg border border-[#3b4954] bg-[#1b2227] p-4 items-center">
-                <div class="text-white" data-icon="PokerChip" data-size="24px" data-weight="regular">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                    <path
-                      d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,152a48,48,0,1,1,48-48A48.05,48.05,0,0,1,128,176Zm39.21-98.53a63.66,63.66,0,0,0-31.21-13V40.37a87.6,87.6,0,0,1,48.28,20ZM120,64.52a63.66,63.66,0,0,0-31.21,13L71.72,60.4a87.6,87.6,0,0,1,48.28-20ZM77.47,88.79a63.66,63.66,0,0,0-13,31.21H40.37a87.6,87.6,0,0,1,20-48.28ZM64.52,136a63.66,63.66,0,0,0,13,31.21L60.4,184.28a87.6,87.6,0,0,1-20-48.28Zm24.27,42.53A63.66,63.66,0,0,0,120,191.48v24.15a87.6,87.6,0,0,1-48.28-20ZM136,191.48a63.66,63.66,0,0,0,31.21-12.95l17.07,17.07a87.6,87.6,0,0,1-48.28,20Zm42.53-24.27A63.66,63.66,0,0,0,191.48,136h24.15a87.6,87.6,0,0,1-20,48.28ZM191.48,120a63.66,63.66,0,0,0-12.95-31.21L195.6,71.72a87.6,87.6,0,0,1,20,48.28Z"
-                    ></path>
-                  </svg>
-                </div>
-                <h2 class="text-white text-base font-bold leading-tight">Embedded Systems</h2>
-              </div>
-              <div class="flex flex-1 gap-3 rounded-lg border border-[#3b4954] bg-[#1b2227] p-4 items-center">
-                <div class="text-white" data-icon="LinuxLogo" data-size="24px" data-weight="regular">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                    <path
-                      d="M229,222.25A8,8,0,0,1,217.76,221C216.39,219.27,184,177.86,184,96A56,56,0,0,0,72,96c0,81.86-32.37,123.27-33.75,125a8,8,0,0,1-12.51-10c.15-.2,7.69-9.9,15.13-28.74C47.77,164.8,56,135.64,56,96a72,72,0,0,1,144,0c0,39.64,8.23,68.8,15.13,86.28,7.48,18.94,15.06,28.64,15.14,28.74A8,8,0,0,1,229,222.25ZM100,96a12,12,0,1,0,12,12A12,12,0,0,0,100,96Zm68,12a12,12,0,1,0-12,12A12,12,0,0,0,168,108ZM99.58,136.84a8,8,0,0,0-7.15,14.31l32,16a7.94,7.94,0,0,0,7.15,0l32-16a8,8,0,0,0-7.16-14.31L128,151.05ZM128,184a54.07,54.07,0,0,0-47,28.11,8,8,0,1,0,14,7.78,37.35,37.35,0,0,1,66,0,8,8,0,0,0,14-7.78A54.07,54.07,0,0,0,128,184Z"
-                    ></path>
-                  </svg>
-                </div>
-                <h2 class="text-white text-base font-bold leading-tight">Raspberry Pi</h2>
-              </div>
-              <div class="flex flex-1 gap-3 rounded-lg border border-[#3b4954] bg-[#1b2227] p-4 items-center">
-                <div class="text-white" data-icon="AndroidLogo" data-size="24px" data-weight="regular">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                    <path
-                      d="M176,156a12,12,0,1,1-12-12A12,12,0,0,1,176,156ZM92,144a12,12,0,1,0,12,12A12,12,0,0,0,92,144Zm148,24v24a16,16,0,0,1-16,16H32a16,16,0,0,1-16-16V169.13A113.38,113.38,0,0,1,51.4,86.72L26.34,61.66A8,8,0,0,1,37.66,50.34L63.82,76.5a111.43,111.43,0,0,1,128.55-.19l26-26a8,8,0,0,1,11.32,11.32L204.82,86.5c.75.71,1.5,1.43,2.24,2.17A111.25,111.25,0,0,1,240,168Zm-16,0a96,96,0,0,0-96-96h-.34C74.91,72.18,32,115.75,32,169.13V192H224Z"
-                    ></path>
-                  </svg>
-                </div>
-                <h2 class="text-white text-base font-bold leading-tight">Arduino</h2>
-              </div>
-              <div class="flex flex-1 gap-3 rounded-lg border border-[#3b4954] bg-[#1b2227] p-4 items-center">
-                <div class="text-white" data-icon="Cloud" data-size="24px" data-weight="regular">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                    <path
-                      d="M160,40A88.09,88.09,0,0,0,81.29,88.67,64,64,0,1,0,72,216h88a88,88,0,0,0,0-176Zm0,160H72a48,48,0,0,1,0-96c1.1,0,2.2,0,3.29.11A88,88,0,0,0,72,128a8,8,0,0,0,16,0,72,72,0,1,1,72,72Z"
-                    ></path>
-                  </svg>
-                </div>
-                <h2 class="text-white text-base font-bold leading-tight">Cloud Computing</h2>
-              </div>
-              <div class="flex flex-1 gap-3 rounded-lg border border-[#3b4954] bg-[#1b2227] p-4 items-center">
-                <div class="text-white" data-icon="Database" data-size="24px" data-weight="regular">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                    <path
-                      d="M128,24C74.17,24,32,48.6,32,80v96c0,31.4,42.17,56,96,56s96-24.6,96-56V80C224,48.6,181.83,24,128,24Zm80,104c0,9.62-7.88,19.43-21.61,26.92C170.93,163.35,150.19,168,128,168s-42.93-4.65-58.39-13.08C55.88,147.43,48,137.62,48,128V111.36c17.06,15,46.23,24.64,80,24.64s62.94-9.68,80-24.64ZM69.61,53.08C85.07,44.65,105.81,40,128,40s42.93,4.65,58.39,13.08C200.12,60.57,208,70.38,208,80s-7.88,19.43-21.61,26.92C170.93,115.35,150.19,120,128,120s-42.93-4.65-58.39-13.08C55.88,99.43,48,89.62,48,80S55.88,60.57,69.61,53.08ZM186.39,202.92C170.93,211.35,150.19,216,128,216s-42.93-4.65-58.39-13.08C55.88,195.43,48,185.62,48,176V159.36c17.06,15,46.23,24.64,80,24.64s62.94-9.68,80-24.64V176C208,185.62,200.12,195.43,186.39,202.92Z"
-                    ></path>
-                  </svg>
-                </div>
-                <h2 class="text-white text-base font-bold leading-tight">Database Management</h2>
-              </div>
-            </div>
-            <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Projects</h2>
-            <div class="flex gap-3 p-3 flex-wrap pr-4">
-              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#283139] pl-4 pr-4">
-                <p class="text-white text-sm font-medium leading-normal">All</p>
-              </div>
-              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#283139] pl-4 pr-4">
-                <p class="text-white text-sm font-medium leading-normal">IoT</p>
-              </div>
-              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#283139] pl-4 pr-4">
-                <p class="text-white text-sm font-medium leading-normal">AI</p>
-              </div>
-              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#283139] pl-4 pr-4">
-                <p class="text-white text-sm font-medium leading-normal">Web</p>
-              </div>
-            </div>
-            <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
-              <div class="flex flex-col gap-3 pb-3">
-                <div
-                  class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
-                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAaiMZWtOk_GFsmQzra5J77owk6xuEWOoAswqB7-_1Lc0sLrzSFhOmMjEMAtJrzHusyQkV7QdU2jj7L1NCDiv6zRNtoLuX-DxA54izOLA3296s05P8BDT-hsJrcJn5u-Bkwym4koM7NhP8Rbj8EJLoO68OZsj0WT2m4e3FgGpO56kXvrTY4I-D49jpKEdLogHvi9IzPldkdINlaY2A2ZDhMCVcx6ugSy977INktSSHO1VpAYOPEF2GQ2LXlh8MLV-XjLQPF6jbgKs0Z");'
-                ></div>
-                <div>
-                  <p class="text-white text-base font-medium leading-normal">Smart Home Automation System</p>
-                  <p class="text-[#9cacba] text-sm font-normal leading-normal">An IoT system for controlling home appliances remotely.</p>
-                </div>
-              </div>
-              <div class="flex flex-col gap-3 pb-3">
-                <div
-                  class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
-                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBzQgpXbYOoKRwjqlgKN7TKggpgYWs9PGGhmPN-aJies6rjGB773YtOmXwOQDw8Y_ICwtTCj121eTPoPx5uLaT7hdb82wqPKlw_bMK-2nLJCD1kJPVVoBkTTGh0arIMEkjrTPaJ93lkZ1omqZHWFRpw8xLx2I9scEZCndUfTjIW7vOlmyTDksqJsuWdHWxnqZzh4K47VCt8naYbjzvnE7j8uJMB-oAWYo7c7DPJDzHyPSGtgSGQzo6Aw-mRU2mShNj3U1OulCLurfBO");'
-                ></div>
-                <div>
-                  <p class="text-white text-base font-medium leading-normal">AI-Powered Environmental Monitoring</p>
-                  <p class="text-[#9cacba] text-sm font-normal leading-normal">An AI-driven system for monitoring air quality.</p>
-                </div>
-              </div>
-              <div class="flex flex-col gap-3 pb-3">
-                <div
-                  class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
-                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAJlij6FTDQqHzO_r3RCI3iLS3wR6G9Y_LJY7ZqAMdvT3Ajx6Jbod_z_z8QEWh2TGLnNwS59idKGzQJii62_eDiHfTq0JXVvFYEELAZOreAXlMgr2fbkAs5tK74lyF5H9icuOa0hOCmSTZGjm-4VwSHojjPoQfzx3qhR4vltBMHldp7EKKuB4Vg0vRsBaZF48370KRDyotRUffQ94bDp09URQ6433gMex4xvB233KDccCE6bvd5OVk-vZC9lSVrtHpTLX1_eeT7l6_1");'
-                ></div>
-                <div>
-                  <p class="text-white text-base font-medium leading-normal">Personal Portfolio Website</p>
-                  <p class="text-[#9cacba] text-sm font-normal leading-normal">A personal portfolio website showcasing projects and skills.</p>
-                </div>
-              </div>
-              <div class="flex flex-col gap-3 pb-3">
-                <div
-                  class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
-                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuASYf7PqIp71TifgGsI7Z-49MpwVw1XuhV01KcMkmrdUizVhIiuude2x803y9K_y3ao2W9SP86OElwxDTPfMbbBIPeHvpbsVuSYxO2d9lsq8APPfAQh3JW2brZXJkmYl_-WOFLirUe5GfZVrvyY7yOwRFq7Ek9PV47PwTEmgE-MzF7oCpQDPBCsoOvmcvLZLqAQkr51DmiRyga7eZxtFA88BT4WjAoahLeg3IDqrBN7OMxufZW5cJifMcYl9pslCWobR2iBDetwtplI");'
-                ></div>
-                <div>
-                  <p class="text-white text-base font-medium leading-normal">Autonomous Drone Navigation</p>
-                  <p class="text-[#9cacba] text-sm font-normal leading-normal">A drone navigation system using computer vision.</p>
-                </div>
-              </div>
-            </div>
-            <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Blog</h2>
-            <div class="p-4">
-              <div class="flex items-stretch justify-between gap-4 rounded-lg">
-                <div class="flex flex-col gap-1 flex-[2_2_0px]">
-                  <p class="text-[#9cacba] text-sm font-normal leading-normal">IoT Tips</p>
-                  <p class="text-white text-base font-bold leading-tight">Optimizing Battery Life in IoT Devices</p>
-                  <p class="text-[#9cacba] text-sm font-normal leading-normal">
-                    Learn effective techniques to extend battery life in your IoT projects, covering power management strategies and hardware considerations.
-                  </p>
-                </div>
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1"></div>
-              </div>
-            </div>
-            <div class="p-4">
-              <div class="flex items-stretch justify-between gap-4 rounded-lg">
-                <div class="flex flex-col gap-1 flex-[2_2_0px]">
-                  <p class="text-[#9cacba] text-sm font-normal leading-normal">Code</p>
-                  <p class="text-white text-base font-bold leading-tight">Implementing MQTT Protocol in Python</p>
-                  <p class="text-[#9cacba] text-sm font-normal leading-normal">
-                    A step-by-step guide on using the MQTT protocol for IoT communication with Python, including code examples and best practices.
-                  </p>
-                </div>
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1"></div>
-              </div>
-            </div>
-            <div class="p-4">
-              <div class="flex items-stretch justify-between gap-4 rounded-lg">
-                <div class="flex flex-col gap-1 flex-[2_2_0px]">
-                  <p class="text-[#9cacba] text-sm font-normal leading-normal">Internships</p>
-                  <p class="text-white text-base font-bold leading-tight">Securing an IoT Internship: Tips and Strategies</p>
-                  <p class="text-[#9cacba] text-sm font-normal leading-normal">
-                    Practical advice and strategies for landing an internship in the IoT field, including resume tips, interview preparation, and networking.
-                  </p>
-                </div>
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1"></div>
-              </div>
-            </div>
-            <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Contact</h2>
-            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-              <label class="flex flex-col min-w-40 flex-1">
-                <p class="text-white text-base font-medium leading-normal pb-2">Name</p>
-                <input
-                  placeholder="Your Name"
-                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#283139] focus:border-none h-14 placeholder:text-[#9cacba] p-4 text-base font-normal leading-normal"
-                  value=""
-                />
-              </label>
-            </div>
-            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-              <label class="flex flex-col min-w-40 flex-1">
-                <p class="text-white text-base font-medium leading-normal pb-2">Email</p>
-                <input
-                  placeholder="Your Email"
-                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#283139] focus:border-none h-14 placeholder:text-[#9cacba] p-4 text-base font-normal leading-normal"
-                  value=""
-                />
-              </label>
-            </div>
-            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-              <label class="flex flex-col min-w-40 flex-1">
-                <p class="text-white text-base font-medium leading-normal pb-2">Message</p>
-                <textarea
-                  placeholder="Your Message"
-                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#283139] focus:border-none min-h-36 placeholder:text-[#9cacba] p-4 text-base font-normal leading-normal"
-                ></textarea>
-              </label>
-            </div>
-            <div class="flex px-4 py-3 justify-end">
-              <button
-                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#2496f3] text-white text-sm font-bold leading-normal tracking-[0.015em]"
-              >
-                <span class="truncate">Send</span>
-              </button>
-            </div>
-            <div class="@container">
-              <div class="gap-2 px-4 flex flex-wrap justify-start">
-                <div class="flex flex-col items-center gap-2 bg-[#111518] py-2.5 text-center w-20">
-                  <div class="rounded-full bg-[#283139] p-2.5">
-                    <div class="text-white" data-icon="LinkedinLogo" data-size="20px" data-weight="regular">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
-                        <path
-                          d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"
-                        ></path>
-                      </svg>
-                    </div>
-                  </div>
-                  <p class="text-white text-sm font-medium leading-normal">LinkedIn</p>
-                </div>
-                <div class="flex flex-col items-center gap-2 bg-[#111518] py-2.5 text-center w-20">
-                  <div class="rounded-full bg-[#283139] p-2.5">
-                    <div class="text-white" data-icon="GithubLogo" data-size="20px" data-weight="regular">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
-                        <path
-                          d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.72,41.72,0,0,1,200,104Z"
-                        ></path>
-                      </svg>
-                    </div>
-                  </div>
-                  <p class="text-white text-sm font-medium leading-normal">GitHub</p>
-                </div>
-                <div class="flex flex-col items-center gap-2 bg-[#111518] py-2.5 text-center w-20">
-                  <div class="rounded-full bg-[#283139] p-2.5">
-                    <div class="text-white" data-icon="Envelope" data-size="20px" data-weight="regular">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
-                        <path
-                          d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48Zm-96,85.15L52.57,64H203.43ZM98.71,128,40,181.81V74.19Zm11.84,10.85,12,11.05a8,8,0,0,0,10.82,0l12-11.05,58,53.15H52.57ZM157.29,128,216,74.18V181.82Z"
-                        ></path>
-                      </svg>
-                    </div>
-                  </div>
-                  <p class="text-white text-sm font-medium leading-normal">Email</p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-        <footer class="flex justify-center">
-          <div class="flex max-w-[960px] flex-1 flex-col">
-            <footer class="flex flex-col gap-6 px-5 py-10 text-center @container">
-              <div class="flex flex-wrap justify-center gap-4">
-                <a href="#">
-                  <div class="text-[#9cacba]" data-icon="LinkedinLogo" data-size="24px" data-weight="regular">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                      <path
-                        d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"
-                      ></path>
-                    </svg>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="text-[#9cacba]" data-icon="GithubLogo" data-size="24px" data-weight="regular">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                      <path
-                        d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.72,41.72,0,0,1,200,104Z"
-                      ></path>
-                    </svg>
-                  </div>
-                </a>
-              </div>
-              <p class="text-[#9cacba] text-base font-normal leading-normal">© 2024 Alex Chen. All rights reserved.</p>
-            </footer>
-          </div>
-        </footer>
-      </div>
+
+        <!-- Windows 10 Taskbar -->
+        <div class="relative z-20 bg-gray-900 bg-opacity-70 h-12 flex items-center px-2 shadow-lg">
+            <!-- Start Button -->
+            <div class="h-full px-4 flex items-center justify-center cursor-pointer hover:bg-blue-600 transition-colors duration-200 rounded-md mr-2">
+                <i data-lucide="windows" class="w-6 h-6 text-white"></i>
+            </div>
+
+            <!-- Taskbar Apps (currently open or pinned) -->
+            <div id="desktopTaskbarApps" class="flex-grow flex items-center space-x-1">
+                <!-- Pinned apps will appear here dynamically -->
+            </div>
+
+            <!-- System Tray -->
+            <div class="flex items-center space-x-3 text-sm text-white px-2">
+                <span id="desktopTime"></span>
+                <span id="desktopDate"></span>
+                <i data-lucide="wifi" class="w-5 h-5"></i>
+                <i data-lucide="volume-2" class="w-5 h-5"></i>
+                <i data-lucide="battery-charging" class="w-5 h-5"></i>
+            </div>
+        </div>
+
+        <!-- Windows 10 App Windows (Modals) -->
+        <div id="desktopAppModals" class="absolute inset-0 flex items-center justify-center z-30 pointer-events-none">
+            <!-- About Window -->
+            <div id="aboutDesktopWindow" class="win10-window hidden bg-gray-100 text-gray-900 rounded-lg shadow-2xl w-11/12 md:w-3/4 lg:w-2/3 h-3/4 flex flex-col overflow-hidden pointer-events-auto" style="min-width: 300px; min-height: 300px;">
+                <div class="win10-window-header bg-blue-600 text-white p-2 flex justify-between items-center rounded-t-lg cursor-grab">
+                    <span class="font-semibold flex items-center"><i data-lucide="user" class="w-4 h-4 mr-2"></i> About Me</span>
+                    <div class="flex space-x-1">
+                        <button class="win10-window-button hover:bg-blue-700 px-3 py-1 rounded-md transition-colors duration-150" onclick="minimizeApp('about', 'desktop')">
+                            <i data-lucide="minus" class="w-4 h-4"></i>
+                        </button>
+                        <button class="win10-window-button hover:bg-blue-700 px-3 py-1 rounded-md transition-colors duration-150" onclick="maximizeApp('about', 'desktop')">
+                            <i data-lucide="square" class="w-4 h-4"></i>
+                        </button>
+                        <button class="win10-window-button hover:bg-red-600 px-3 py-1 rounded-md transition-colors duration-150" onclick="closeApp('about', 'desktop')">
+                            <i data-lucide="x" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-4 flex-grow overflow-auto custom-scrollbar">
+                    <h2 class="text-2xl font-bold mb-4">Greetings! I'm [Your Name]</h2>
+                    <p class="mb-4">I'm a passionate [Your Profession/Role], dedicated to crafting innovative and user-centric digital experiences. With a strong foundation in [Your Key Skills/Technologies, e.g., web development, data science, design], I thrive on solving complex problems and bringing ideas to life through code and creativity.</p>
+                    <p class="mb-4">My journey in technology began [mention when/how, e.g., "years ago when I first discovered the magic of coding"]. Since then, I've been continuously learning and adapting to new technologies, always striving to build robust, scalable, and elegant solutions.</p>
+                    <p class="mb-4">Outside of coding, you can find me [mention hobbies/interests, e.g., "exploring new hiking trails, experimenting with new recipes, or diving into a good book"]. I believe in a balanced life that fuels both professional growth and personal well-being.</p>
+                    <p>I'm always eager to connect with fellow enthusiasts and collaborate on exciting projects. Feel free to explore my work and reach out!</p>
+                </div>
+            </div>
+
+            <!-- Projects Window -->
+            <div id="projectsDesktopWindow" class="win10-window hidden bg-gray-100 text-gray-900 rounded-lg shadow-2xl w-11/12 md:w-3/4 lg:w-2/3 h-3/4 flex flex-col overflow-hidden pointer-events-auto" style="min-width: 300px; min-height: 300px;">
+                <div class="win10-window-header bg-green-600 text-white p-2 flex justify-between items-center rounded-t-lg cursor-grab">
+                    <span class="font-semibold flex items-center"><i data-lucide="folder-git" class="w-4 h-4 mr-2"></i> My Projects</span>
+                    <div class="flex space-x-1">
+                        <button class="win10-window-button hover:bg-green-700 px-3 py-1 rounded-md transition-colors duration-150" onclick="minimizeApp('projects', 'desktop')">
+                            <i data-lucide="minus" class="w-4 h-4"></i>
+                        </button>
+                        <button class="win10-window-button hover:bg-green-700 px-3 py-1 rounded-md transition-colors duration-150" onclick="maximizeApp('projects', 'desktop')">
+                            <i data-lucide="square" class="w-4 h-4"></i>
+                        </button>
+                        <button class="win10-window-button hover:bg-red-600 px-3 py-1 rounded-md transition-colors duration-150" onclick="closeApp('projects', 'desktop')">
+                            <i data-lucide="x" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-4 flex-grow overflow-auto custom-scrollbar grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Project 1 -->
+                    <div class="bg-white p-4 rounded-lg shadow-md">
+                        <img src="https://placehold.co/400x200/E0E7FF/000000?text=Project+1+Image" alt="Project 1" class="w-full h-40 object-cover rounded-md mb-4">
+                        <h3 class="text-xl font-semibold mb-2">Project Name One</h3>
+                        <p class="text-gray-700 mb-3">A brief description of this project, highlighting its purpose, technologies used (e.g., React, Node.js, MongoDB), and key features.</p>
+                        <a href="#" class="text-blue-600 hover:underline">View Project</a>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="bg-white p-4 rounded-lg shadow-md">
+                        <img src="https://placehold.co/400x200/D1FAE5/000000?text=Project+2+Image" alt="Project 2" class="w-full h-40 object-cover rounded-md mb-4">
+                        <h3 class="text-xl font-semibold mb-2">Innovative Solution Two</h3>
+                        <p class="text-gray-700 mb-3">This project involved [mention challenge/problem solved] using [technologies]. It showcases my skills in [specific skills].</p>
+                        <a href="#" class="text-blue-600 hover:underline">View Project</a>
+                    </div>
+                    <!-- Project 3 -->
+                    <div class="bg-white p-4 rounded-lg shadow-md">
+                        <img src="https://placehold.co/400x200/FFFBEB/000000?text=Project+3+Image" alt="Project 3" class="w-full h-40 object-cover rounded-md mb-4">
+                        <h3 class="text-xl font-semibold mb-2">Data Visualization Dashboard</h3>
+                        <p class="text-gray-700 mb-3">Developed an interactive dashboard for [data type] using [e.g., D3.js, Python, Flask].</p>
+                        <a href="#" class="text-blue-600 hover:underline">View Project</a>
+                    </div>
+                    <!-- Project 4 -->
+                    <div class="bg-white p-4 rounded-lg shadow-md">
+                        <img src="https://placehold.co/400x200/FEE2E2/000000?text=Project+4+Image" alt="Project 4" class="w-full h-40 object-cover rounded-md mb-4">
+                        <h3 class="text-xl font-semibold mb-2">Mobile Game Development</h3>
+                        <p class="text-gray-700 mb-3">Created a simple mobile game using [e.g., Unity, React Native] with engaging mechanics.</p>
+                        <a href="#" class="text-blue-600 hover:underline">View Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience Window -->
+            <div id="experienceDesktopWindow" class="win10-window hidden bg-gray-100 text-gray-900 rounded-lg shadow-2xl w-11/12 md:w-3/4 lg:w-2/3 h-3/4 flex flex-col overflow-hidden pointer-events-auto" style="min-width: 300px; min-height: 300px;">
+                <div class="win10-window-header bg-purple-600 text-white p-2 flex justify-between items-center rounded-t-lg cursor-grab">
+                    <span class="font-semibold flex items-center"><i data-lucide="briefcase" class="w-4 h-4 mr-2"></i> My Experience</span>
+                    <div class="flex space-x-1">
+                        <button class="win10-window-button hover:bg-purple-700 px-3 py-1 rounded-md transition-colors duration-150" onclick="minimizeApp('experience', 'desktop')">
+                            <i data-lucide="minus" class="w-4 h-4"></i>
+                        </button>
+                        <button class="win10-window-button hover:bg-purple-700 px-3 py-1 rounded-md transition-colors duration-150" onclick="maximizeApp('experience', 'desktop')">
+                            <i data-lucide="square" class="w-4 h-4"></i>
+                        </button>
+                        <button class="win10-window-button hover:bg-red-600 px-3 py-1 rounded-md transition-colors duration-150" onclick="closeApp('experience', 'desktop')">
+                            <i data-lucide="x" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-4 flex-grow overflow-auto custom-scrollbar">
+                    <div class="mb-6 pb-4 border-b border-gray-200">
+                        <h3 class="text-xl font-semibold mb-1">Senior Software Engineer</h3>
+                        <p class="text-gray-700 font-medium">Tech Solutions Inc. | Jan 2022 - Present</p>
+                        <ul class="list-disc list-inside text-gray-800 mt-2">
+                            <li>Led the development of scalable backend services using Node.js and AWS Lambda, improving system performance by 30%.</li>
+                            <li>Mentored junior developers and conducted code reviews, fostering a culture of high-quality code.</li>
+                            <li>Collaborated with product teams to translate business requirements into technical specifications.</li>
+                        </ul>
+                    </div>
+                    <div class="mb-6 pb-4 border-b border-gray-200">
+                        <h3 class="text-xl font-semibold mb-1">Full Stack Developer</h3>
+                        <p class="text-gray-700 font-medium">Web Innovations Co. | June 2019 - Dec 2021</p>
+                        <ul class="list-disc list-inside text-gray-800 mt-2">
+                            <li>Developed and maintained responsive web applications using React.js and Django.</li>
+                            <li>Implemented RESTful APIs and integrated with third-party services.</li>
+                            <li>Contributed to database design and optimization (PostgreSQL).</li>
+                        </ul>
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold mb-1">Junior Web Developer</h3>
+                        <p class="text-gray-700 font-medium">Startup Hub | Aug 2018 - May 2019</p>
+                        <ul class="list-disc list-inside text-gray-800 mt-2">
+                            <li>Assisted in front-end development using HTML, CSS, and JavaScript.</li>
+                            <li>Participated in daily stand-ups and agile development cycles.</li>
+                            <li>Learned best practices in version control with Git.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Window -->
+            <div id="contactDesktopWindow" class="win10-window hidden bg-gray-100 text-gray-900 rounded-lg shadow-2xl w-11/12 md:w-3/4 lg:w-2/3 h-3/4 flex flex-col overflow-hidden pointer-events-auto" style="min-width: 300px; min-height: 300px;">
+                <div class="win10-window-header bg-red-600 text-white p-2 flex justify-between items-center rounded-t-lg cursor-grab">
+                    <span class="font-semibold flex items-center"><i data-lucide="mail" class="w-4 h-4 mr-2"></i> Contact Me</span>
+                    <div class="flex space-x-1">
+                        <button class="win10-window-button hover:bg-red-700 px-3 py-1 rounded-md transition-colors duration-150" onclick="minimizeApp('contact', 'desktop')">
+                            <i data-lucide="minus" class="w-4 h-4"></i>
+                        </button>
+                        <button class="win10-window-button hover:bg-red-700 px-3 py-1 rounded-md transition-colors duration-150" onclick="maximizeApp('contact', 'desktop')">
+                            <i data-lucide="square" class="w-4 h-4"></i>
+                        </button>
+                        <button class="win10-window-button hover:bg-red-600 px-3 py-1 rounded-md transition-colors duration-150" onclick="closeApp('contact', 'desktop')">
+                            <i data-lucide="x" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-4 flex-grow overflow-auto custom-scrollbar">
+                    <p class="mb-4">I'd love to hear from you! Whether you have a question, a project idea, or just want to say hello, feel free to reach out using the methods below.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i data-lucide="mail" class="w-6 h-6 text-blue-600 mr-3"></i>
+                            <span class="text-lg">Email: <a href="mailto:your.email@example.com" class="text-blue-600 hover:underline">your.email@example.com</a></span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-lucide="linkedin" class="w-6 h-6 text-blue-600 mr-3"></i>
+                            <span class="text-lg">LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank" class="text-blue-600 hover:underline">linkedin.com/in/yourprofile</a></span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-lucide="github" class="w-6 h-6 text-gray-800 mr-3"></i>
+                            <span class="text-lg">GitHub: <a href="https://github.com/yourusername" target="_blank" class="text-blue-600 hover:underline">github.com/yourusername</a></span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-lucide="phone" class="w-6 h-6 text-green-600 mr-3"></i>
+                            <span class="text-lg">Phone: <a href="tel:+1234567890" class="text-blue-600 hover:underline">+1 (234) 567-890</a></span>
+                        </div>
+                    </div>
+                    <p class="mt-6 text-gray-600">You can also fill out the form below, but for a real portfolio, you'd integrate a backend for this!</p>
+                    <form class="mt-4 space-y-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                            <input type="text" id="name" name="name" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                            <input type="email" id="email" name="email" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                            <textarea id="message" name="message" rows="4" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+                        </div>
+                        <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-  </body>
+
+    <!-- Mobile View (Android themed) -->
+    <div id="mobileView" class="mobile-only flex flex-col h-full w-full bg-gradient-to-br from-green-500 to-teal-700 relative">
+        <!-- Android Status Bar (Top) -->
+        <div class="bg-gray-900 bg-opacity-70 h-8 flex items-center justify-between px-4 text-xs text-white shadow-md">
+            <div class="flex items-center space-x-1">
+                <i data-lucide="wifi" class="w-4 h-4"></i>
+                <span>4G</span>
+            </div>
+            <span id="mobileTime"></span>
+            <div class="flex items-center space-x-1">
+                <i data-lucide="battery-charging" class="w-4 h-4"></i>
+                <span>85%</span>
+            </div>
+        </div>
+
+        <!-- Android Home Screen Grid -->
+        <div class="flex-grow p-4 grid grid-cols-4 gap-4 content-start overflow-auto custom-scrollbar">
+            <!-- About App -->
+            <div class="android-app-icon flex flex-col items-center justify-center p-2 rounded-lg cursor-pointer active:scale-95 transition-transform duration-100" onclick="openApp('about', 'mobile')">
+                <div class="bg-blue-500 p-3 rounded-full shadow-md flex items-center justify-center">
+                    <i data-lucide="user" class="w-7 h-7 text-white"></i>
+                </div>
+                <span class="text-white text-xs mt-2 text-center">About</span>
+            </div>
+            <!-- Projects App -->
+            <div class="android-app-icon flex flex-col items-center justify-center p-2 rounded-lg cursor-pointer active:scale-95 transition-transform duration-100" onclick="openApp('projects', 'mobile')">
+                <div class="bg-green-500 p-3 rounded-full shadow-md flex items-center justify-center">
+                    <i data-lucide="folder-git" class="w-7 h-7 text-white"></i>
+                </div>
+                <span class="text-white text-xs mt-2 text-center">Projects</span>
+            </div>
+            <!-- Experience App -->
+            <div class="android-app-icon flex flex-col items-center justify-center p-2 rounded-lg cursor-pointer active:scale-95 transition-transform duration-100" onclick="openApp('experience', 'mobile')">
+                <div class="bg-purple-500 p-3 rounded-full shadow-md flex items-center justify-center">
+                    <i data-lucide="briefcase" class="w-7 h-7 text-white"></i>
+                </div>
+                <span class="text-white text-xs mt-2 text-center">Experience</span>
+            </div>
+            <!-- Contact App -->
+            <div class="android-app-icon flex flex-col items-center justify-center p-2 rounded-lg cursor-pointer active:scale-95 transition-transform duration-100" onclick="openApp('contact', 'mobile')">
+                <div class="bg-red-500 p-3 rounded-full shadow-md flex items-center justify-center">
+                    <i data-lucide="mail" class="w-7 h-7 text-white"></i>
+                </div>
+                <span class="text-white text-xs mt-2 text-center">Contact</span>
+            </div>
+        </div>
+
+        <!-- Android Navigation Bar (Bottom) -->
+        <div class="bg-gray-900 bg-opacity-70 h-14 flex items-center justify-around px-4 shadow-lg">
+            <button class="flex flex-col items-center text-white text-xs focus:outline-none" onclick="goHomeMobile()">
+                <i data-lucide="circle" class="w-6 h-6"></i>
+                <span>Home</span>
+            </button>
+            <button class="flex flex-col items-center text-white text-xs focus:outline-none" onclick="goBackMobile()">
+                <i data-lucide="square" class="w-6 h-6"></i>
+                <span>Recents</span>
+            </button>
+            <button class="flex flex-col items-center text-white text-xs focus:outline-none" onclick="goBackMobile()">
+                <i data-lucide="triangle" class="w-6 h-6 rotate-90"></i>
+                <span>Back</span>
+            </button>
+        </div>
+
+        <!-- Android App Modals (Full-screen overlays) -->
+        <div id="mobileAppModals" class="absolute inset-0 flex flex-col bg-gray-900 bg-opacity-95 z-30 hidden">
+            <!-- About App (Mobile) -->
+            <div id="aboutMobileApp" class="mobile-app hidden flex-grow flex flex-col bg-white text-gray-900 rounded-t-lg shadow-2xl overflow-hidden">
+                <div class="bg-blue-600 text-white p-4 flex items-center shadow-md">
+                    <button class="mr-3" onclick="closeApp('about', 'mobile')">
+                        <i data-lucide="arrow-left" class="w-6 h-6"></i>
+                    </button>
+                    <span class="text-xl font-semibold">About Me</span>
+                </div>
+                <div class="p-4 flex-grow overflow-auto custom-scrollbar">
+                    <h2 class="text-2xl font-bold mb-4">Greetings! I'm [Your Name]</h2>
+                    <p class="mb-4">I'm a passionate [Your Profession/Role], dedicated to crafting innovative and user-centric digital experiences. With a strong foundation in [Your Key Skills/Technologies, e.g., web development, data science, design], I thrive on solving complex problems and bringing ideas to life through code and creativity.</p>
+                    <p class="mb-4">My journey in technology began [mention when/how, e.g., "years ago when I first discovered the magic of coding"]. Since then, I've been continuously learning and adapting to new technologies, always striving to build robust, scalable, and elegant solutions.</p>
+                    <p class="mb-4">Outside of coding, you can find me [mention hobbies/interests, e.g., "exploring new hiking trails, experimenting with new recipes, or diving into a good book"]. I believe in a balanced life that fuels both professional growth and personal well-being.</p>
+                    <p>I'm always eager to connect with fellow enthusiasts and collaborate on exciting projects. Feel free to explore my work and reach out!</p>
+                </div>
+            </div>
+
+            <!-- Projects App (Mobile) -->
+            <div id="projectsMobileApp" class="mobile-app hidden flex-grow flex flex-col bg-white text-gray-900 rounded-t-lg shadow-2xl overflow-hidden">
+                <div class="bg-green-600 text-white p-4 flex items-center shadow-md">
+                    <button class="mr-3" onclick="closeApp('projects', 'mobile')">
+                        <i data-lucide="arrow-left" class="w-6 h-6"></i>
+                    </button>
+                    <span class="text-xl font-semibold">My Projects</span>
+                </div>
+                <div class="p-4 flex-grow overflow-auto custom-scrollbar space-y-6">
+                    <!-- Project 1 -->
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-md">
+                        <img src="https://placehold.co/400x200/E0E7FF/000000?text=Project+1+Image" alt="Project 1" class="w-full h-40 object-cover rounded-md mb-4">
+                        <h3 class="text-xl font-semibold mb-2">Project Name One</h3>
+                        <p class="text-gray-700 mb-3 text-sm">A brief description of this project, highlighting its purpose, technologies used (e.g., React, Node.js, MongoDB), and key features.</p>
+                        <a href="#" class="text-blue-600 hover:underline text-sm">View Project</a>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-md">
+                        <img src="https://placehold.co/400x200/D1FAE5/000000?text=Project+2+Image" alt="Project 2" class="w-full h-40 object-cover rounded-md mb-4">
+                        <h3 class="text-xl font-semibold mb-2">Innovative Solution Two</h3>
+                        <p class="text-gray-700 mb-3 text-sm">This project involved [mention challenge/problem solved] using [technologies]. It showcases my skills in [specific skills].</p>
+                        <a href="#" class="text-blue-600 hover:underline text-sm">View Project</a>
+                    </div>
+                    <!-- Project 3 -->
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-md">
+                        <img src="https://placehold.co/400x200/FFFBEB/000000?text=Project+3+Image" alt="Project 3" class="w-full h-40 object-cover rounded-md mb-4">
+                        <h3 class="text-xl font-semibold mb-2">Data Visualization Dashboard</h3>
+                        <p class="text-gray-700 mb-3 text-sm">Developed an interactive dashboard for [data type] using [e.g., D3.js, Python, Flask].</p>
+                        <a href="#" class="text-blue-600 hover:underline text-sm">View Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience App (Mobile) -->
+            <div id="experienceMobileApp" class="mobile-app hidden flex-grow flex flex-col bg-white text-gray-900 rounded-t-lg shadow-2xl overflow-hidden">
+                <div class="bg-purple-600 text-white p-4 flex items-center shadow-md">
+                    <button class="mr-3" onclick="closeApp('experience', 'mobile')">
+                        <i data-lucide="arrow-left" class="w-6 h-6"></i>
+                    </button>
+                    <span class="text-xl font-semibold">My Experience</span>
+                </div>
+                <div class="p-4 flex-grow overflow-auto custom-scrollbar space-y-6">
+                    <div class="pb-4 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold mb-1">Senior Software Engineer</h3>
+                        <p class="text-gray-700 font-medium text-sm">Tech Solutions Inc. | Jan 2022 - Present</p>
+                        <ul class="list-disc list-inside text-gray-800 text-sm mt-2">
+                            <li>Led development of scalable backend services.</li>
+                            <li>Mentored junior developers.</li>
+                            <li>Collaborated with product teams.</li>
+                        </ul>
+                    </div>
+                    <div class="pb-4 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold mb-1">Full Stack Developer</h3>
+                        <p class="text-gray-700 font-medium text-sm">Web Innovations Co. | June 2019 - Dec 2021</p>
+                        <ul class="list-disc list-inside text-gray-800 text-sm mt-2">
+                            <li>Developed and maintained responsive web apps.</li>
+                            <li>Implemented RESTful APIs.</li>
+                            <li>Contributed to database design.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-1">Junior Web Developer</h3>
+                        <p class="text-gray-700 font-medium text-sm">Startup Hub | Aug 2018 - May 2019</p>
+                        <ul class="list-disc list-inside text-gray-800 text-sm mt-2">
+                            <li>Assisted in front-end development.</li>
+                            <li>Participated in agile cycles.</li>
+                            <li>Learned Git version control.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact App (Mobile) -->
+            <div id="contactMobileApp" class="mobile-app hidden flex-grow flex flex-col bg-white text-gray-900 rounded-t-lg shadow-2xl overflow-hidden">
+                <div class="bg-red-600 text-white p-4 flex items-center shadow-md">
+                    <button class="mr-3" onclick="closeApp('contact', 'mobile')">
+                        <i data-lucide="arrow-left" class="w-6 h-6"></i>
+                    </button>
+                    <span class="text-xl font-semibold">Contact Me</span>
+                </div>
+                <div class="p-4 flex-grow overflow-auto custom-scrollbar">
+                    <p class="mb-4 text-sm">I'd love to hear from you! Reach out using the methods below.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i data-lucide="mail" class="w-5 h-5 text-blue-600 mr-3"></i>
+                            <span class="text-md">Email: <a href="mailto:your.email@example.com" class="text-blue-600 hover:underline">your.email@example.com</a></span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-lucide="linkedin" class="w-5 h-5 text-blue-600 mr-3"></i>
+                            <span class="text-md">LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank" class="text-blue-600 hover:underline">linkedin.com/in/yourprofile</a></span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-lucide="github" class="w-5 h-5 text-gray-800 mr-3"></i>
+                            <span class="text-md">GitHub: <a href="https://github.com/yourusername" target="_blank" class="text-blue-600 hover:underline">github.com/yourusername</a></span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-lucide="phone" class="w-5 h-5 text-green-600 mr-3"></i>
+                            <span class="text-md">Phone: <a href="tel:+1234567890" class="text-blue-600 hover:underline">+1 (234) 567-890</a></span>
+                        </div>
+                    </div>
+                    <form class="mt-4 space-y-4">
+                        <div>
+                            <label for="mobile-name" class="block text-sm font-medium text-gray-700">Name</label>
+                            <input type="text" id="mobile-name" name="name" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm">
+                        </div>
+                        <div>
+                            <label for="mobile-email" class="block text-sm font-medium text-gray-700">Email</label>
+                            <input type="email" id="mobile-email" name="email" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm">
+                        </div>
+                        <div>
+                            <label for="mobile-message" class="block text-sm font-medium text-gray-700">Message</label>
+                            <textarea id="mobile-message" name="message" rows="3" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm"></textarea>
+                        </div>
+                        <button type="submit" class="inline-flex justify-center py-2 px-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            Send
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // --- Global State and Utility Functions ---
+        let currentOpenApp = null; // Tracks the currently open app (e.g., 'about', 'projects')
+        // Stores x, y, width, height for each app when not maximized. This is the source of truth for unmaximized state.
+        let desktopWindowPositions = {};
+        let desktopWindowMaximized = {}; // Stores boolean for maximized state
+
+        // Function to update time and date
+        function updateTimeAndDate() {
+            const now = new Date();
+            const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: true };
+            const dateOptions = { weekday: 'short', month: 'short', day: 'numeric' };
+
+            // Desktop
+            const desktopTimeElement = document.getElementById('desktopTime');
+            const desktopDateElement = document.getElementById('desktopDate');
+            if (desktopTimeElement) desktopTimeElement.textContent = now.toLocaleTimeString('en-US', timeOptions);
+            if (desktopDateElement) desktopDateElement.textContent = now.toLocaleDateString('en-US', dateOptions);
+
+            // Mobile
+            const mobileTimeElement = document.getElementById('mobileTime');
+            if (mobileTimeElement) mobileTimeElement.textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        // Update time every second
+        setInterval(updateTimeAndDate, 1000);
+        updateTimeAndDate(); // Initial call
+
+        // --- Device Detection and UI Switching ---
+        function setDeviceView() {
+            const desktopView = document.getElementById('desktopView');
+            const mobileView = document.getElementById('mobileView');
+
+            // Using Tailwind's md breakpoint (768px) as the threshold
+            if (window.innerWidth >= 768) {
+                desktopView.classList.remove('hidden');
+                mobileView.classList.add('hidden');
+            } else {
+                desktopView.classList.add('hidden');
+                mobileView.classList.remove('hidden');
+            }
+            // Close any open apps when switching views
+            closeAllApps();
+        }
+
+        // Listen for resize events to switch views
+        window.addEventListener('resize', setDeviceView);
+        window.addEventListener('load', setDeviceView); // Initial call on load
+
+        // --- App Management Functions ---
+
+        /**
+         * Opens a specific app based on type and device.
+         * @param {string} appName - The name of the app (e.g., 'about', 'projects').
+         * @param {string} deviceType - 'desktop' or 'mobile'.
+         */
+        function openApp(appName, deviceType) {
+            closeAllApps(); // Ensure only one app is open at a time
+
+            currentOpenApp = appName;
+
+            if (deviceType === 'desktop') {
+                const windowElement = document.getElementById(`${appName}DesktopWindow`);
+                if (windowElement) {
+                    windowElement.classList.remove('hidden');
+                    windowElement.style.display = 'flex'; // Ensure flex for column layout
+                    windowElement.style.zIndex = 40; // Bring to front
+                    windowElement.style.transform = 'scale(1)'; // Reset scale for animation
+
+                    // Add to taskbar if not already there
+                    addToTaskbar(appName);
+
+                    // Initialize or restore position
+                    if (!desktopWindowPositions[appName]) {
+                        // Initial center position
+                        const defaultWidth = window.innerWidth * 0.75;
+                        const defaultHeight = window.innerHeight * 0.75;
+                        const defaultX = (window.innerWidth - defaultWidth) / 2;
+                        const defaultY = (window.innerHeight - defaultHeight - 48) / 2; // Account for taskbar
+
+                        windowElement.style.left = `${defaultX}px`;
+                        windowElement.style.top = `${defaultY}px`;
+                        windowElement.style.width = `${defaultWidth}px`;
+                        windowElement.style.height = `${defaultHeight}px`;
+                        windowElement.style.transform = 'none'; // Ensure no conflicting transforms
+
+                        desktopWindowPositions[appName] = {
+                            x: defaultX,
+                            y: defaultY,
+                            width: defaultWidth,
+                            height: defaultHeight
+                        };
+                    } else {
+                        // Restore previous position and size if not currently maximized
+                        if (!desktopWindowMaximized[appName]) {
+                            const pos = desktopWindowPositions[appName];
+                            windowElement.style.left = `${pos.x}px`;
+                            windowElement.style.top = `${pos.y}px`;
+                            windowElement.style.width = `${pos.width}px`;
+                            windowElement.style.height = `${pos.height}px`;
+                            windowElement.style.transform = 'none';
+                        } else {
+                            // If it was maximized, re-maximize it
+                            maximizeApp(appName, 'desktop');
+                        }
+                    }
+
+                    // Make draggable
+                    makeDraggable(windowElement);
+                }
+            } else if (deviceType === 'mobile') {
+                const appElement = document.getElementById(`${appName}MobileApp`);
+                const mobileAppModals = document.getElementById('mobileAppModals');
+                if (appElement && mobileAppModals) {
+                    mobileAppModals.classList.remove('hidden');
+                    appElement.classList.remove('hidden');
+                    appElement.style.display = 'flex'; // Ensure flex for column layout
+                    mobileAppModals.style.zIndex = 40; // Bring overlay to front
+                }
+            }
+            lucide.createIcons(); // Re-render icons if new elements are shown
+        }
+
+        /**
+         * Closes a specific app based on type and device.
+         * @param {string} appName - The name of the app.
+         * @param {string} deviceType - 'desktop' or 'mobile'.
+         */
+        function closeApp(appName, deviceType) {
+            if (deviceType === 'desktop') {
+                const windowElement = document.getElementById(`${appName}DesktopWindow`);
+                if (windowElement) {
+                    windowElement.classList.add('hidden');
+                    windowElement.style.display = 'none';
+                    removeFromTaskbar(appName);
+                    desktopWindowMaximized[appName] = false; // Reset maximized state
+                }
+            } else if (deviceType === 'mobile') {
+                const appElement = document.getElementById(`${appName}MobileApp`);
+                const mobileAppModals = document.getElementById('mobileAppModals');
+                if (appElement && mobileAppModals) {
+                    appElement.classList.add('hidden');
+                    appElement.style.display = 'none';
+                    // Hide the overlay only if no other mobile apps are open
+                    const openMobileApps = Array.from(mobileAppModals.querySelectorAll('.mobile-app')).filter(app => !app.classList.contains('hidden'));
+                    if (openMobileApps.length === 0) {
+                        mobileAppModals.classList.add('hidden');
+                    }
+                }
+            }
+            if (currentOpenApp === appName) {
+                currentOpenApp = null;
+            }
+        }
+
+        /**
+         * Closes all currently open apps across both desktop and mobile views.
+         */
+        function closeAllApps() {
+            // Close desktop windows
+            document.querySelectorAll('.win10-window').forEach(windowEl => {
+                windowEl.classList.add('hidden');
+                windowEl.style.display = 'none';
+                const appName = windowEl.id.replace('DesktopWindow', '');
+                desktopWindowMaximized[appName] = false; // Reset maximized state
+            });
+            // Clear taskbar
+            const taskbarApps = document.getElementById('desktopTaskbarApps');
+            if (taskbarApps) taskbarApps.innerHTML = '';
+
+            // Close mobile apps
+            document.querySelectorAll('.mobile-app').forEach(appEl => {
+                appEl.classList.add('hidden');
+                appEl.style.display = 'none';
+            });
+            const mobileAppModals = document.getElementById('mobileAppModals');
+            if (mobileAppModals) mobileAppModals.classList.add('hidden');
+
+            currentOpenApp = null;
+        }
+
+        // --- Desktop Specific Functions ---
+
+        /**
+         * Adds an app icon to the desktop taskbar.
+         * @param {string} appName - The name of the app.
+         */
+        function addToTaskbar(appName) {
+            const taskbarApps = document.getElementById('desktopTaskbarApps');
+            if (!taskbarApps) return;
+
+            // Prevent adding duplicate
+            if (document.getElementById(`taskbar-${appName}`)) {
+                // If already in taskbar, just bring the window to front
+                const windowElement = document.getElementById(`${appName}DesktopWindow`);
+                if (windowElement) {
+                    windowElement.style.zIndex = getHighestZIndex() + 1;
+                }
+                return;
+            }
+
+            const appIconData = {
+                'about': { icon: 'user', color: 'blue' },
+                'projects': { icon: 'folder-git', color: 'green' },
+                'experience': { icon: 'briefcase', color: 'purple' },
+                'contact': { icon: 'mail', color: 'red' }
+            };
+
+            const data = appIconData[appName];
+            if (!data) return;
+
+            const taskbarItem = document.createElement('div');
+            taskbarItem.id = `taskbar-${appName}`;
+            taskbarItem.className = `win10-taskbar-item h-full px-3 flex items-center justify-center cursor-pointer hover:bg-${data.color}-600 transition-colors duration-200 rounded-md`;
+            taskbarItem.innerHTML = `<i data-lucide="${data.icon}" class="w-5 h-5 text-white"></i>`;
+            taskbarItem.onclick = () => toggleMinimizeMaximize(appName, 'desktop');
+            taskbarApps.appendChild(taskbarItem);
+            lucide.createIcons();
+        }
+
+        /**
+         * Removes an app icon from the desktop taskbar.
+         * @param {string} appName - The name of the app.
+         */
+        function removeFromTaskbar(appName) {
+            const taskbarItem = document.getElementById(`taskbar-${appName}`);
+            if (taskbarItem) {
+                taskbarItem.remove();
+            }
+        }
+
+        /**
+         * Toggles minimize/maximize state for a desktop app.
+         * @param {string} appName - The name of the app.
+         * @param {string} deviceType - 'desktop' (only desktop for this function).
+         */
+        function toggleMinimizeMaximize(appName, deviceType) {
+            if (deviceType !== 'desktop') return;
+
+            const windowElement = document.getElementById(`${appName}DesktopWindow`);
+            if (!windowElement) return;
+
+            if (windowElement.classList.contains('hidden')) {
+                // If hidden (minimized), show it and bring to front
+                windowElement.classList.remove('hidden');
+                windowElement.style.display = 'flex';
+                windowElement.style.zIndex = getHighestZIndex() + 1;
+                // If it was maximized, restore maximized state
+                if (desktopWindowMaximized[appName]) {
+                    maximizeApp(appName, 'desktop'); // Re-maximize it
+                } else {
+                    // Restore original size/position if not maximized
+                    const pos = desktopWindowPositions[appName];
+                    if (pos) {
+                        windowElement.style.left = `${pos.x}px`;
+                        windowElement.style.top = `${pos.y}px`;
+                        windowElement.style.width = `${pos.width}px`;
+                        windowElement.style.height = `${pos.height}px`;
+                        windowElement.style.transform = 'none';
+                    }
+                }
+            } else {
+                // If visible, minimize it
+                windowElement.classList.add('hidden');
+                windowElement.style.display = 'none';
+            }
+        }
+
+        /**
+         * Minimizes a desktop app window.
+         * @param {string} appName - The name of the app.
+         * @param {string} deviceType - 'desktop' (only desktop for this function).
+         */
+        function minimizeApp(appName, deviceType) {
+            if (deviceType !== 'desktop') return;
+            const windowElement = document.getElementById(`${appName}DesktopWindow`);
+            if (windowElement) {
+                windowElement.classList.add('hidden');
+                windowElement.style.display = 'none';
+            }
+        }
+
+        /**
+         * Maximizes a desktop app window.
+         * @param {string} appName - The name of the app.
+         * @param {string} deviceType - 'desktop' (only desktop for this function).
+         */
+        function maximizeApp(appName, deviceType) {
+            if (deviceType !== 'desktop') return;
+            const windowElement = document.getElementById(`${appName}DesktopWindow`);
+            if (!windowElement) return;
+
+            if (desktopWindowMaximized[appName]) {
+                // Restore to original size/position from desktopWindowPositions
+                const originalPos = desktopWindowPositions[appName];
+                if (originalPos) {
+                    windowElement.style.left = `${originalPos.x}px`;
+                    windowElement.style.top = `${originalPos.y}px`;
+                    windowElement.style.width = `${originalPos.width}px`;
+                    windowElement.style.height = `${originalPos.height}px`;
+                    windowElement.style.transform = 'none';
+                }
+                desktopWindowMaximized[appName] = false;
+            } else {
+                // Store current position before maximizing
+                // This saves the state to revert to when unmaximized
+                desktopWindowPositions[appName] = {
+                    x: windowElement.offsetLeft,
+                    y: windowElement.offsetTop,
+                    width: windowElement.offsetWidth,
+                    height: windowElement.offsetHeight
+                };
+
+                // Maximize
+                windowElement.style.left = '0';
+                windowElement.style.top = '0';
+                windowElement.style.width = '100%';
+                windowElement.style.height = 'calc(100% - 48px)'; /* Account for taskbar height */
+                windowElement.style.transform = 'none'; // Remove any previous transforms
+                desktopWindowMaximized[appName] = true;
+            }
+            windowElement.style.zIndex = getHighestZIndex() + 1; // Bring to front
+        }
+
+        /**
+         * Makes a desktop window draggable.
+         * @param {HTMLElement} element - The window element to make draggable.
+         */
+        function makeDraggable(element) {
+            const header = element.querySelector('.win10-window-header');
+            if (!header) return;
+
+            let isDragging = false;
+            let offsetX, offsetY;
+            const appName = element.id.replace('DesktopWindow', '');
+
+            header.onmousedown = (e) => {
+                // Bring to front immediately on mousedown
+                element.style.zIndex = getHighestZIndex() + 1;
+
+                if (desktopWindowMaximized[appName]) {
+                    // If currently maximized, unmaximize it first
+                    maximizeApp(appName, 'desktop'); // This toggles it back to its stored normal size/position
+
+                    // After unmaximizing, calculate offsets based on the new (unmaximized) position
+                    // Use setTimeout to ensure browser has rendered the unmaximized state
+                    setTimeout(() => {
+                        offsetX = e.clientX - element.getBoundingClientRect().left;
+                        offsetY = e.clientY - element.getBoundingClientRect().top;
+                        isDragging = true; // Start dragging after unmaximize and offset calculation
+                    }, 0); // Use 0ms timeout for next available event loop cycle
+                } else {
+                    // If not maximized, just calculate offsets and start dragging immediately
+                    offsetX = e.clientX - element.getBoundingClientRect().left;
+                    offsetY = e.clientY - element.getBoundingClientRect().top;
+                    isDragging = true;
+                }
+
+                element.style.cursor = 'grabbing';
+                element.style.userSelect = 'none'; // Prevent text selection during drag
+            };
+
+            document.onmousemove = (e) => {
+                if (!isDragging) return;
+                let newX = e.clientX - offsetX;
+                let newY = e.clientY - offsetY;
+
+                // Keep window within bounds
+                const taskbarHeight = 48; // Height of the taskbar
+                const minX = 0;
+                const minY = 0;
+                const maxX = window.innerWidth - element.offsetWidth;
+                const maxY = window.innerHeight - element.offsetHeight - taskbarHeight;
+
+                newX = Math.max(minX, Math.min(newX, maxX));
+                newY = Math.max(minY, Math.min(newY, maxY));
+
+                element.style.left = `${newX}px`;
+                element.style.top = `${newY}px`;
+                element.style.transform = 'none'; // Ensure no conflicting transforms
+            };
+
+            document.onmouseup = () => {
+                isDragging = false;
+                element.style.cursor = 'grab';
+                element.style.userSelect = 'auto';
+                // Save the new position only if it's not maximized (it was just unmaximized or was already unmaximized)
+                if (!desktopWindowMaximized[appName]) {
+                    desktopWindowPositions[appName] = {
+                        x: element.offsetLeft,
+                        y: element.offsetTop,
+                        width: element.offsetWidth,
+                        height: element.offsetHeight
+                    };
+                }
+            };
+        }
+
+        /**
+         * Gets the highest z-index among all desktop windows.
+         * @returns {number} The highest z-index found.
+         */
+        function getHighestZIndex() {
+            let maxZIndex = 30; // Base z-index for modals
+            document.querySelectorAll('.win10-window').forEach(windowEl => {
+                const zIndex = parseInt(windowEl.style.zIndex || maxZIndex);
+                if (zIndex > maxZIndex) {
+                    maxZIndex = zIndex;
+                }
+            });
+            return maxZIndex;
+        }
+
+        // --- Mobile Specific Functions ---
+
+        /**
+         * Navigates back in the mobile view.
+         * Currently just closes the open app.
+         */
+        function goBackMobile() {
+            if (currentOpenApp) {
+                closeApp(currentOpenApp, 'mobile');
+            }
+        }
+
+        /**
+         * Navigates to the mobile home screen (closes all apps).
+         */
+        function goHomeMobile() {
+            closeAllApps();
+        }
+
+        // Initial setup for draggable windows on load (if desktop view is active)
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.win10-window').forEach(windowEl => {
+                makeDraggable(windowEl);
+            });
+        });
+
+    </script>
+</body>
 </html>
