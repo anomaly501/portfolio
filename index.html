@@ -3,625 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio OS</title>
-    <style>
-        /* --- General Styling & Dark Theme --- */
-        body {
-            margin: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #272829;
-            color: #D8D9DA;
-            overflow: hidden; /* Prevent scrolling the body */
-            user-select: none; /* Prevents text selection on drag */
-        }
-        .desktop {
-            width: 100vw;
-            height: 100vh;
-            position: relative;
-            box-sizing: border-box;
-            background-color: #272829;
-        }
-
-        /* --- Diamond Shape Background Element --- */
-        .diamond-shape {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300px;
-            height: 300px;
-            background-color: #61677A;
-            transform: translate(-50%, -50%) rotate(45deg);
-            box-shadow: 0 0 50px 20px rgba(216, 217, 218, 0.5);
-            z-index: 1;
-            opacity: 0.15;
-            transition: opacity 0.5s ease;
-        }
-
-        /* --- Grid Background Animation --- */
-        .grid-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(20px, 1fr));
-            grid-template-rows: repeat(auto-fill, minmax(20px, 1fr));
-            opacity: 0.3;
-            transition: opacity 0.5s ease;
-            pointer-events: none; /* Allows clicks to pass through to the desktop */
-            z-index: 2;
-        }
-        .grid-cell {
-            background-color: rgba(216, 217, 218, 0.05);
-            transition: background-color 0.3s ease;
-        }
-        @keyframes pulse {
-            0% { background-color: rgba(216, 217, 218, 0.1); }
-            50% { background-color: rgba(216, 217, 218, 0.25); }
-            100% { background-color: rgba(216, 217, 218, 0.1); }
-        }
-        .pulsing-cell {
-            animation: pulse 4s infinite ease-in-out;
-        }
-
-        /* --- Desktop Icons --- */
-        .icon {
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 80px;
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.1s ease;
-            padding: 5px;
-            border-radius: 5px;
-            z-index: 5; /* Lowered z-index to be behind active windows */
-        }
-        .icon.about-me-icon { top: 20px; left: 20px; }
-        .icon.projects-icon { top: 140px; left: 20px; }
-        .icon.contact-icon { top: 260px; left: 20px; }
-        
-        .icon:hover {
-            background-color: rgba(97, 103, 122, 0.3);
-        }
-        .icon img {
-            width: 64px; /* Increased icon size */
-            height: 64px; /* Increased icon size */
-            margin-bottom: 5px;
-        }
-        .icon span {
-            font-size: 14px;
-            padding: 2px 4px;
-            border-radius: 3px;
-        }
-
-        /* --- Window Styling --- */
-        .window {
-            position: absolute;
-            width: 600px;
-            max-width: 90vw;
-            height: 400px;
-            max-height: 80vh;
-            background-color: #61677A;
-            border: 1px solid #D8D9DA;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            display: none; /* Initially hidden */
-            flex-direction: column;
-            z-index: 10; /* Base z-index */
-            overflow: hidden;
-            resize: both;
-        }
-        .window.active {
-            display: flex;
-        }
-        .window.minimized {
-            display: none !important;
-        }
-        .window.maximized {
-            width: 100vw;
-            height: calc(100vh - 40px);
-            top: 0;
-            left: 0;
-            transform: none; /* Reset transform for full screen */
-            border-radius: 0;
-            resize: none;
-        }
-
-        /* --- Title Bar --- */
-        .title-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 12px;
-            background-color: #61677A;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            cursor: grab;
-        }
-        .title-bar.maximized {
-            border-radius: 0;
-            cursor: default;
-        }
-        .window-title {
-            font-weight: bold;
-            font-size: 14px;
-            color: #D8D9DA;
-        }
-        .controls {
-            display: flex;
-            gap: 8px;
-        }
-        .controls button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            width: 16px;
-            height: 16px;
-            opacity: 0.8;
-            transition: opacity 0.2s;
-        }
-        .controls button:hover {
-            opacity: 1;
-        }
-        .controls img {
-            width: 100%;
-            height: 100%;
-            filter: invert(0.85); /* Adjust icon color for the new theme */
-        }
-
-        /* --- Window Content --- */
-        .window-content {
-            flex-grow: 1;
-            padding: 15px;
-            overflow-y: auto;
-            color: #D8D9DA;
-            background-color: #61677A; /* Fix for transparency */
-        }
-        .window-content h2, .window-content h3 { color: #D8D9DA; }
-
-        /* --- Project Card Styling --- */
-        .project-card {
-            background-color: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-        }
-
-        /* --- Parallax Scrolling Effect --- */
-        .parallax-section {
-            height: 300px;
-            background-attachment: fixed; /* This is the key CSS property for parallax */
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            position: relative;
-            z-index: 1;
-            margin: 20px 0;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-        }
-        .parallax-section h2 {
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 10px 20px;
-            border-radius: 5px;
-        }
-        .parallax-1 { background-image: url('https://source.unsplash.com/1600x900/?code,space'); }
-        .parallax-2 { background-image: url('https://source.unsplash.com/1600x900/?coding,abstract'); }
-        .parallax-3 { background-image: url('https://source.unsplash.com/1600x900/?technology,minimal'); }
-
-        /* --- Taskbar --- */
-        .taskbar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 40px;
-            background-color: #272829;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 15px;
-            box-sizing: border-box;
-            z-index: 999;
-        }
-        .taskbar-icons {
-            display: flex;
-            gap: 5px;
-        }
-        .taskbar-icon {
-            width: 30px;
-            height: 30px;
-            border-radius: 5px;
-            background-color: rgba(216, 217, 218, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        .taskbar-icon:hover, .taskbar-icon.active {
-            background-color: rgba(216, 217, 218, 0.2);
-        }
-        .taskbar-icon img {
-            width: 20px;
-            height: 20px;
-        }
-        .clock {
-            font-size: 14px;
-            color: #D8D9DA;
-        }
-    </style>
+    <title>Interactive Particle Flow Simulation</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="desktop">
-        <!-- New diamond shape background element -->
-        <div class="diamond-shape"></div>
-        <!-- New grid background element -->
-        <div class="grid-background"></div>
+    <!-- New Navbar HTML -->
+    <nav class="navbar">
+        <a href="#" class="logo">Portfolio</a>
 
-        <!-- Draggable Desktop Icons -->
-        <div class="icon about-me-icon" data-window-id="about-me-window">
-            <img src="https://api.iconify.design/ri:user-3-fill.svg?color=%23D8D9DA" alt="About Me">
-            <span>About Me</span>
-        </div>
-        <div class="icon projects-icon" data-window-id="projects-window">
-            <img src="https://api.iconify.design/ri:code-s-slash-line.svg?color=%23D8D9DA" alt="Projects">
-            <span>Projects</span>
-        </div>
-        <div class="icon contact-icon" data-window-id="contact-window">
-            <img src="https://api.iconify.design/ri:mail-send-fill.svg?color=%23D8D9DA" alt="Contact">
-            <span>Contact</span>
-        </div>
+        <!-- menu toggle for small screens (3-bar hamburger) -->
+        <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="main-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
 
-        <!-- Windows -->
-        <div class="window" id="about-me-window">
-            <div class="title-bar">
-                <span class="window-title">About Me</span>
-                <div class="controls">
-                    <button class="minimize"><img src="https://api.iconify.design/ri:subtract-line.svg?color=%23D8D9DA" alt="Minimize"></button>
-                    <button class="maximize"><img src="https://api.iconify.design/ri:checkbox-blank-line.svg?color=%23D8D9DA" alt="Maximize"></button>
-                    <button class="close"><img src="https://api.iconify.design/ri:close-line.svg?color=%23D8D9DA" alt="Close"></button>
-                </div>
-            </div>
-            <div class="window-content">
-                <div class="parallax-section parallax-1">
-                    <h2>Hello, I'm Gemini!</h2>
-                </div>
-                <p>I am an AI assistant built by Google. I specialize in helping people with a wide range of tasks, from writing and coding to brainstorming and learning. I'm passionate about technology and its potential to solve complex problems.</p>
-                <div class="parallax-section parallax-2">
-                    <h2>My Skills</h2>
-                </div>
-                <ul>
-                    <li>HTML, CSS, JavaScript</li>
-                    <li>Python, Java, C++</li>
-                    <li>Natural Language Processing</li>
-                    <li>Problem-Solving</li>
-                    <li>Creative Writing</li>
-                </ul>
-                <div class="parallax-section parallax-3">
-                    <h2>Always Learning</h2>
-                </div>
-                <p>I am constantly being updated with new information to provide the best possible assistance. My goal is to be a helpful and creative partner in your endeavors.</p>
-            </div>
-        </div>
-        
-        <div class="window" id="projects-window">
-            <div class="title-bar">
-                <span class="window-title">Projects</span>
-                <div class="controls">
-                    <button class="minimize"><img src="https://api.iconify.design/ri:subtract-line.svg?color=%23D8D9DA" alt="Minimize"></button>
-                    <button class="maximize"><img src="https://api.iconify.design/ri:checkbox-blank-line.svg?color=%23D8D9DA" alt="Maximize"></button>
-                    <button class="close"><img src="https://api.iconify.design/ri:close-line.svg?color=%23D8D9DA" alt="Close"></button>
-                </div>
-            </div>
-            <div class="window-content">
-                <h2>My Projects</h2>
-                <div class="project-card">
-                    <h3>Project 1: Portfolio OS</h3>
-                    <p>A portfolio website designed to look like a desktop operating system, built with vanilla HTML, CSS, and JavaScript.</p>
-                </div>
-                <div class="project-card">
-                    <h3>Project 2: AI Chatbot</h3>
-                    <p>A simple chatbot implementation using natural language processing to understand and respond to user queries.</p>
-                </div>
-                <!-- Add more project cards here -->
-            </div>
-        </div>
+        <ul id="main-menu">
+            <!-- mobile-only close button inside the sliding panel -->
+            <button class="menu-close" aria-label="Close menu">&times;</button>
 
-        <div class="window" id="contact-window">
-            <div class="title-bar">
-                <span class="window-title">Contact</span>
-                <div class="controls">
-                    <button class="minimize"><img src="https://api.iconify.design/ri:subtract-line.svg?color=%23D8D9DA" alt="Minimize"></button>
-                    <button class="maximize"><img src="https://api.iconify.design/ri:checkbox-blank-line.svg?color=%23D8D9DA" alt="Maximize"></button>
-                    <button class="close"><img src="https://api.iconify.design/ri:close-line.svg?color=%23D8D9DA" alt="Close"></button>
-                </div>
-            </div>
-            <div class="window-content">
-                <h2>Get in Touch</h2>
-                <form>
-                    <label for="name">Name:</label><br>
-                    <input type="text" id="name" name="name"><br>
-                    <label for="email">Email:</label><br>
-                    <input type="email" id="email" name="email"><br>
-                    <label for="message">Message:</label><br>
-                    <textarea id="message" name="message"></textarea><br>
-                    <button type="submit">Send</button>
-                </form>
-                <div class="social-links">
-                    <a href="#" target="_blank"><img src="https://api.iconify.design/ri:github-fill.svg?color=%23D8D9DA" alt="GitHub"></a>
-                    <a href="#" target="_blank"><img src="https://api.iconify.design/ri:linkedin-box-fill.svg?color=%23D8D9DA" alt="LinkedIn"></a>
-                    <a href="#" target="_blank"><img src="https://api.iconify.design/ri:twitter-x-fill.svg?color=%23D8D9DA" alt="Twitter"></a>
-                </div>
-            </div>
-        </div>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">About Me</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div id="home-title" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:2; pointer-events:none;">
+        <h1 style="margin:0; color:#fff; font-size:2.5rem; font-weight:700; text-align:center;">Aman Kumar</h1>
     </div>
 
-    <!-- Taskbar -->
-    <div class="taskbar">
-        <div class="taskbar-icons">
-            <!-- Icons for open windows will be added here -->
-        </div>
-        <div class="clock"></div>
-    </div>
+    <canvas id="simulationCanvas"></canvas>
 
+    <!-- Menu toggle script (placed before your simulation script) -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const desktop = document.querySelector('.desktop');
-            const icons = document.querySelectorAll('.icon');
-            const windows = document.querySelectorAll('.window');
-            const taskbarIconsContainer = document.querySelector('.taskbar-icons');
-            const taskbarClock = document.querySelector('.taskbar .clock');
-            const aboutMeWindowContent = document.querySelector('#about-me-window .window-content');
-            const parallaxSections = document.querySelectorAll('.parallax-section');
-            const gridBackground = document.querySelector('.grid-background');
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggle = document.querySelector('.menu-toggle');
+        const menu = document.querySelector('.navbar ul');
+        const closeBtn = document.querySelector('.menu-close');
+        const links = document.querySelectorAll('.navbar ul li a');
 
-            let highestZIndex = 10;
-            let minimizedWindows = new Map();
-            let draggingItem = null;
-            let dragOffset = { x: 0, y: 0 };
-            let originalPosition = { left: '0px', top: '0px' };
+        function openMenu() {
+            const isOpen = menu.classList.toggle('open');
+            toggle.classList.toggle('open', isOpen);
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        }
 
-            // --- Generate Grid Cells ---
-            function generateGrid() {
-                const desktopWidth = desktop.offsetWidth;
-                const desktopHeight = desktop.offsetHeight;
-                const cellSize = 20;
-                const cellsX = Math.ceil(desktopWidth / cellSize);
-                const cellsY = Math.ceil(desktopHeight / cellSize);
+        function closeMenu() {
+            menu.classList.remove('open');
+            toggle.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+        }
 
-                gridBackground.innerHTML = ''; // Clear previous grid
-                gridBackground.style.gridTemplateColumns = `repeat(${cellsX}, 1fr)`;
-                gridBackground.style.gridTemplateRows = `repeat(${cellsY}, 1fr)`;
+        toggle.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
 
-                for (let i = 0; i < cellsX * cellsY; i++) {
-                    const cell = document.createElement('div');
-                    cell.className = 'grid-cell';
-                    if (Math.random() > 0.9) { // Add some random pulsing cells
-                        cell.classList.add('pulsing-cell');
-                    }
-                    gridBackground.appendChild(cell);
-                }
-            }
-
-            // --- Mouse Move Effect on Grid ---
-            function handleMouseMove(e) {
-                const cells = document.querySelectorAll('.grid-cell');
-                const desktopRect = desktop.getBoundingClientRect();
-                const mouseX = e.clientX - desktopRect.left;
-                const mouseY = e.clientY - desktopRect.top;
-
-                cells.forEach(cell => {
-                    const cellRect = cell.getBoundingClientRect();
-                    const cellX = cellRect.left + cellRect.width / 2;
-                    const cellY = cellRect.top + cellRect.height / 2;
-
-                    const distance = Math.sqrt(Math.pow(mouseX - cellX, 2) + Math.pow(mouseY - cellY, 2));
-                    
-                    const maxDistance = 150; // The radius of the effect
-                    if (distance < maxDistance) {
-                        const opacity = 1 - (distance / maxDistance);
-                        cell.style.backgroundColor = `rgba(216, 217, 218, ${opacity * 0.75})`; // A subtle blueish glow
-                    } else {
-                        cell.style.backgroundColor = ''; // Reset to default CSS
-                    }
-                });
-            }
-
-            // --- Real-time Clock ---
-            function updateClock() {
-                const now = new Date();
-                const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-                const date = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-                taskbarClock.textContent = `${time} | ${date}`;
-            }
-            setInterval(updateClock, 1000);
-            updateClock();
-
-            // --- Window Management ---
-            function openWindow(windowEl) {
-                windowEl.classList.remove('minimized');
-                windowEl.style.display = 'flex';
-                bringToFront(windowEl);
-                createTaskbarIcon(windowEl);
-            }
-
-            function bringToFront(windowEl) {
-                highestZIndex++;
-                windowEl.style.zIndex = highestZIndex;
-            }
-
-            function createTaskbarIcon(windowEl) {
-                const windowId = windowEl.id;
-                if (!document.querySelector(`.taskbar-icon[data-window-id="${windowId}"]`)) {
-                    const iconEl = document.createElement('div');
-                    iconEl.className = 'taskbar-icon';
-                    iconEl.setAttribute('data-window-id', windowId);
-                    // Use the icon from the desktop icon
-                    const desktopIconImg = document.querySelector(`.icon[data-window-id="${windowId}"] img`);
-                    if (desktopIconImg) {
-                        iconEl.innerHTML = `<img src="${desktopIconImg.src}" alt="Taskbar Icon">`;
-                    }
-                    iconEl.addEventListener('click', () => {
-                        const targetWindow = document.getElementById(windowId);
-                        if (targetWindow.classList.contains('minimized')) {
-                            targetWindow.classList.remove('minimized');
-                            // Restore position and size
-                            const restoredState = minimizedWindows.get(windowId);
-                            if (restoredState) {
-                                targetWindow.style.left = restoredState.left;
-                                targetWindow.style.top = restoredState.top;
-                                targetWindow.style.transform = restoredState.transform;
-                            }
-                            targetWindow.style.display = 'flex';
-                            bringToFront(targetWindow);
-                            minimizedWindows.delete(windowId);
-                        } else {
-                            bringToFront(targetWindow);
-                        }
-                    });
-                    taskbarIconsContainer.appendChild(iconEl);
-                }
-            }
-
-            // --- Event Listeners ---
-            icons.forEach(icon => {
-                icon.addEventListener('dblclick', () => {
-                    const windowId = icon.dataset.windowId;
-                    const windowEl = document.getElementById(windowId);
-                    if (windowEl) {
-                        openWindow(windowEl);
-                    }
-                });
-            });
-
-            windows.forEach(windowEl => {
-                const titleBar = windowEl.querySelector('.title-bar');
-                const closeBtn = windowEl.querySelector('.close');
-                const minimizeBtn = windowEl.querySelector('.minimize');
-                const maximizeBtn = windowEl.querySelector('.maximize');
-
-                // Bring to front on click
-                windowEl.addEventListener('mousedown', () => {
-                    bringToFront(windowEl);
-                });
-
-                // Close button
-                closeBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    windowEl.style.display = 'none';
-                    const taskbarIcon = document.querySelector(`.taskbar-icon[data-window-id="${windowEl.id}"]`);
-                    if (taskbarIcon) {
-                        taskbarIcon.remove();
-                    }
-                });
-
-                // Minimize button
-                minimizeBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    // Save current position and transform before minimizing
-                    minimizedWindows.set(windowEl.id, {
-                        left: windowEl.style.left,
-                        top: windowEl.style.top,
-                        transform: windowEl.style.transform
-                    });
-                    windowEl.classList.add('minimized');
-                });
-
-                // Maximize button
-                maximizeBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    windowEl.classList.toggle('maximized');
-                    titleBar.classList.toggle('maximized');
-                    
-                    if (windowEl.classList.contains('maximized')) {
-                        titleBar.style.cursor = 'default';
-                        // Save the current position to restore later
-                        originalPosition.left = windowEl.style.left;
-                        originalPosition.top = windowEl.style.top;
-                        
-                        // Set the new maximized position
-                        windowEl.style.top = '0px';
-                        windowEl.style.left = '0px';
-                        windowEl.style.transform = 'none';
-                    } else {
-                        titleBar.style.cursor = 'grab';
-                        // Restore the saved position
-                        windowEl.style.left = originalPosition.left;
-                        windowEl.style.top = originalPosition.top;
-                        windowEl.style.transform = '';
-                    }
-                });
-            });
-
-            // --- Window and Icon Dragging ---
-            function startDrag(e, item) {
-                if (item.classList.contains('maximized') && item.classList.contains('window')) return;
-                draggingItem = item;
-                if(item.classList.contains('window')) {
-                    bringToFront(item);
-                }
-                dragOffset.x = e.clientX - draggingItem.offsetLeft;
-                dragOffset.y = e.clientY - draggingItem.offsetTop;
-                draggingItem.style.cursor = 'grabbing';
-            }
-
-            function onDrag(e) {
-                if (!draggingItem) return;
-                e.preventDefault();
-                draggingItem.style.left = `${e.clientX - dragOffset.x}px`;
-                draggingItem.style.top = `${e.clientY - dragOffset.y}px`;
-            }
-
-            function endDrag() {
-                if (!draggingItem) return;
-                draggingItem.style.cursor = 'grab';
-                draggingItem = null;
-            }
-            
-            // Add drag listeners for icons
-            icons.forEach(icon => {
-                icon.addEventListener('mousedown', (e) => startDrag(e, icon));
-            });
-
-            // Add drag listeners for window title bars
-            windows.forEach(windowEl => {
-                const titleBar = windowEl.querySelector('.title-bar');
-                titleBar.addEventListener('mousedown', (e) => {
-                    if (windowEl.classList.contains('maximized')) return;
-                    startDrag(e, windowEl);
-                });
-            });
-
-            // Global listeners for dragging
-            document.addEventListener('mousemove', onDrag);
-            document.addEventListener('mouseup', endDrag);
-            
-            // --- Parallax Scrolling Effect ---
-            if (aboutMeWindowContent) {
-                aboutMeWindowContent.addEventListener('scroll', () => {
-                    const scrollPosition = aboutMeWindowContent.scrollTop;
-                    parallaxSections.forEach(section => {
-                        const speed = 0.5; // Adjust this for different parallax speeds
-                        const yPos = -(scrollPosition * speed);
-                        section.style.backgroundPosition = `center ${yPos}px`;
-                    });
-                });
-            }
-
-            // Initial setup
-            generateGrid();
-            window.addEventListener('resize', generateGrid);
-            desktop.addEventListener('mousemove', handleMouseMove);
-        });
+        // close when a link is tapped (mobile UX)
+        links.forEach(a => a.addEventListener('click', () => {
+            // only close if panel is open (mobile)
+            if (menu.classList.contains('open')) closeMenu();
+        }));
+    });
     </script>
+
+    <script src="script.js"></script>
 </body>
 </html>
