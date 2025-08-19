@@ -1,0 +1,521 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.desktop {
+    width: 100vw;
+    height: 100vh;
+    background: #1a1a1a;
+    background-image: url('select-removebg-preview-dot-art.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+}
+
+/* Desktop Icons */
+.desktop-icons {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.icon {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: clamp(8px, 1vw, 15px);
+    border-radius: 4px;
+    transition: background-color 0.2s;
+    width: clamp(70px, 6vw, 100px);
+    user-select: none;
+}
+
+.icon.dragging {
+    z-index: 999;
+    pointer-events: none;
+}
+
+.icon:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.icon-image {
+    width: clamp(40px, 4vw, 70px);
+    height: clamp(40px, 4vw, 70px);
+    border-radius: clamp(6px, 0.8vw, 12px);
+    margin-bottom: clamp(6px, 0.8vw, 12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(20px, 2.5vw, 32px);
+    color: white;
+}
+
+.about-me-icon {
+    background: url('user.png') no-repeat center;
+    background-size: 100%;
+    color: #1a1a1a;
+}
+
+.contact-icon {
+    background: url('contact.png') no-repeat center;
+    background-size: 100%;
+    color: #1a1a1a;
+}
+
+.projects-icon {
+    background: url('project.png') no-repeat center;
+    background-size: 100%;
+    color: #1a1a1a;
+}
+
+.icon-label {
+    color: white;
+    font-size: clamp(10px, 1.2vw, 16px);
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    font-weight: 500;
+}
+
+/* Windows */
+.window {
+    position: absolute;
+    background: #2d2d30;
+    border: 1px solid #3e3e42;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    min-width: 400px;
+    min-height: 300px;
+    z-index: 100;
+}
+
+.window.hidden {
+    display: none;
+}
+
+.window-header {
+    background: #00E100;
+    color: white;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: move;
+    border-radius: 8px 8px 0 0;
+}
+
+.window-title {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.window-controls {
+    display: flex;
+    gap: 4px;
+}
+
+.control-btn {
+    width: 32px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    transition: background-color 0.2s;
+}
+
+.control-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.control-btn.close:hover {
+    background-color: #e81123;
+}
+
+.window-content {
+    padding: 20px;
+    color: #cccccc;
+    background: #1e1e1e;
+    height: calc(100% - 40px);
+    overflow-y: auto;
+}
+
+.window-content h2 {
+    color: #ffffff;
+    margin-bottom: 16px;
+    font-size: 20px;
+}
+
+.window-content p {
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.window-content ul {
+    margin-left: 20px;
+    margin-bottom: 16px;
+}
+
+.window-content li {
+    margin-bottom: 8px;
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+    padding: 8px;
+    background: #2d2d30;
+    border-radius: 4px;
+    border-left: 3px solid #007acc;
+}
+
+.projects-grid {
+    display: grid;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.project-card {
+    background: #2d2d30;
+    padding: 16px;
+    border-radius: 8px;
+    border-left: 4px solid #007acc;
+    transition: transform 0.2s;
+}
+
+.project-card:hover {
+    transform: translateY(-2px);
+    background: #353538;
+}
+
+.project-card h3 {
+    color: #ffffff;
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.project-card p {
+    color: #cccccc;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.tech-stack {
+    color: #007acc;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Taskbar */
+.taskbar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 48px;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid #333;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    z-index: 1000;
+}
+
+.start-button {
+    background: #1A1A1A;
+    color: #00E100;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.start-button:hover {
+    background: #777777;
+}
+
+.taskbar-apps {
+    flex: 1;
+    display: flex;
+    gap: 4px;
+    margin-left: 8px;
+}
+
+.taskbar-app {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.2s;
+}
+
+.taskbar-app:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.taskbar-app.active {
+    background: #0078d4;
+}
+
+.system-tray {
+    color: white;
+    font-size: 12px;
+}
+
+.time {
+    padding: 4px 8px;
+}
+
+/* Draggable windows */
+.window.dragging {
+    user-select: none;
+    z-index: 1001;
+}
+
+/* Responsive Design */
+
+/* Extra Large screens */
+@media screen and (min-width: 1920px) {
+    .icon {
+        width: clamp(90px, 5vw, 120px);
+        padding: clamp(12px, 1.2vw, 18px);
+    }
+
+    .icon-image {
+        width: clamp(60px, 3.5vw, 80px);
+        height: clamp(60px, 3.5vw, 80px);
+        border-radius: clamp(10px, 1vw, 16px);
+    }
+
+    .icon-label {
+        font-size: clamp(14px, 1vw, 18px);
+    }
+}
+
+/* Large Desktop */
+@media screen and (min-width: 1440px) and (max-width: 1919px) {
+    .icon {
+        width: clamp(80px, 5.5vw, 100px);
+        padding: clamp(10px, 1vw, 15px);
+    }
+
+    .icon-image {
+        width: clamp(50px, 4vw, 70px);
+        height: clamp(50px, 4vw, 70px);
+    }
+
+    .icon-label {
+        font-size: clamp(12px, 1vw, 16px);
+    }
+}
+
+/* Standard Desktop */
+@media screen and (min-width: 1200px) and (max-width: 1439px) {
+    .icon {
+        width: clamp(75px, 6vw, 90px);
+        padding: clamp(10px, 1vw, 14px);
+    }
+
+    .icon-image {
+        width: clamp(48px, 4.5vw, 60px);
+        height: clamp(48px, 4.5vw, 60px);
+    }
+
+    .icon-label {
+        font-size: clamp(11px, 1.1vw, 14px);
+    }
+}
+
+/* Tablet styles */
+@media screen and (min-width: 769px) and (max-width: 1199px) {
+    .icon {
+        width: clamp(70px, 7vw, 95px);
+        padding: clamp(10px, 1.2vw, 15px);
+    }
+
+    .icon-image {
+        width: clamp(45px, 5vw, 65px);
+        height: clamp(45px, 5vw, 65px);
+        font-size: clamp(22px, 3vw, 30px);
+    }
+
+    .icon-label {
+        font-size: clamp(11px, 1.3vw, 15px);
+    }
+
+    .window {
+        min-width: 350px;
+        min-height: 250px;
+    }
+
+    .taskbar {
+        height: clamp(48px, 6vw, 60px);
+    }
+
+    .start-button {
+        padding: clamp(8px, 1.2vw, 18px) clamp(12px, 2vw, 20px);
+        font-size: clamp(13px, 1.5vw, 16px);
+    }
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+    /* Hide taskbar on mobile */
+    .taskbar {
+        display: none;
+    }
+
+    /* Adjust desktop height without taskbar */
+    .desktop {
+        height: 100vh;
+    }
+
+    /* Make windows full screen on mobile */
+    .window {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        min-width: unset;
+        min-height: unset;
+        border-radius: 0;
+        max-width: none;
+        max-height: none;
+    }
+
+    /* Adjust window header for mobile */
+    .window-header {
+        border-radius: 0;
+        padding: clamp(10px, 2vw, 16px);
+    }
+
+    .window-title {
+        font-size: clamp(14px, 2.5vw, 18px);
+    }
+
+    .control-btn {
+        width: clamp(35px, 6vw, 45px);
+        height: clamp(28px, 5vw, 36px);
+        font-size: clamp(14px, 2.5vw, 18px);
+    }
+
+    /* Make icons touch-friendly on mobile */
+    .icon {
+        width: clamp(80px, 12vw, 110px);
+        padding: clamp(12px, 2vw, 18px);
+    }
+
+    .icon-image {
+        width: clamp(50px, 8vw, 75px);
+        height: clamp(50px, 8vw, 75px);
+        font-size: clamp(25px, 4vw, 35px);
+    }
+
+    .icon-label {
+        font-size: clamp(12px, 2vw, 16px);
+        font-weight: 500;
+    }
+
+    /* Adjust window content for mobile */
+    .window-content {
+        padding: clamp(15px, 3vw, 25px);
+        font-size: clamp(14px, 2.5vw, 18px);
+    }
+
+    .window-content h2 {
+        font-size: clamp(18px, 3.5vw, 24px);
+        margin-bottom: clamp(16px, 3vw, 24px);
+    }
+
+    .window-content p {
+        font-size: clamp(14px, 2.5vw, 18px);
+        line-height: 1.6;
+        margin-bottom: clamp(12px, 2.5vw, 18px);
+    }
+
+    /* Projects grid responsive */
+    .projects-grid {
+        gap: clamp(10px, 2vw, 16px);
+    }
+
+    .project-card {
+        padding: clamp(16px, 3vw, 24px);
+    }
+
+    .project-card h3 {
+        font-size: clamp(16px, 3vw, 20px);
+        margin-bottom: clamp(10px, 2vw, 16px);
+    }
+
+    .project-card p {
+        font-size: clamp(13px, 2.2vw, 17px);
+        line-height: 1.5;
+    }
+
+    .tech-stack {
+        font-size: clamp(11px, 2vw, 15px);
+    }
+
+    /* Contact info responsive */
+    .contact-info p {
+        padding: clamp(10px, 2vw, 16px);
+        font-size: clamp(13px, 2.2vw, 17px);
+        margin-bottom: clamp(10px, 2vw, 16px);
+    }
+}
+
+/* Small mobile styles */
+@media screen and (max-width: 480px) {
+    .icon {
+        width: clamp(70px, 15vw, 95px);
+        padding: clamp(10px, 2.5vw, 15px);
+    }
+
+    .icon-image {
+        width: clamp(45px, 10vw, 65px);
+        height: clamp(45px, 10vw, 65px);
+        font-size: clamp(22px, 5vw, 32px);
+    }
+
+    .icon-label {
+        font-size: clamp(10px, 2.5vw, 14px);
+    }
+
+    .window-content {
+        padding: clamp(12px, 3vw, 18px);
+    }
+
+    .window-content h2 {
+        font-size: clamp(16px, 4vw, 22px);
+    }
+
+    .project-card {
+        padding: clamp(12px, 3vw, 18px);
+    }
+
+    .contact-info p {
+        padding: clamp(8px, 2vw, 12px);
+        font-size: clamp(12px, 2.5vw, 16px);
+    }
+}

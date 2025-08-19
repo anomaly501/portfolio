@@ -1,108 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aman Kumar - Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Windows Desktop</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <header>
-        <nav class="nav-container">
-            <div class="nav-pills">
-                <a href="#" class="nav-link active">HOME</a>
-                <a href="#" class="nav-link">ABOUT ME</a>
-                <a href="#" class="nav-link">CONTACT ME</a>
-                <a href="#" class="nav-link">PROJECT</a>
-            </div>
-            <a href="#" class="github-btn">GITHUB</a>
-            
-            <!-- Hamburger Menu -->
-            <button class="hamburger" id="hamburger">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
-        </nav>
-        
-        <!-- Mobile Menu -->
-        <div class="mobile-menu" id="mobile-menu">
-            <a href="#" class="mobile-nav-link active">HOME</a>
-            <a href="#" class="mobile-nav-link">ABOUT ME</a>
-            <a href="#" class="mobile-nav-link">CONTACT ME</a>
-            <a href="#" class="mobile-nav-link">PROJECT</a>
-            <a href="#" class="mobile-nav-link github-mobile">GITHUB</a>
-        </div>
-    </header>
 
-    <main>
-        <div class="hero-section">
-            <div class="name-display">
-                <h1>AMAN</h1>
-                <h1 class="kumar">KUMAR</h1>
+<body>
+    <div class="desktop">
+        <!-- Desktop Icons -->
+        <div class="desktop-icons">
+            <div class="icon" data-app="about-me" style="top: 20px; left: 20px;">
+                <div class="icon-image about-me-icon"></div>
+                <span class="icon-label">About Me</span>
+            </div>
+
+            <div class="icon" data-app="contact" style="top: 120px; left: 20px;">
+                <div class="icon-image contact-icon"></div>
+                <span class="icon-label">Contact</span>
+            </div>
+
+            <div class="icon" data-app="projects" style="top: 220px; left: 20px;">
+                <div class="icon-image projects-icon"></div>
+                <span class="icon-label">Projects</span>
             </div>
         </div>
-        
-        <footer class="social-footer">
-            <div class="social-links">
-                <!-- Desktop social buttons -->
-                <a href="#" class="social-btn desktop-social">EMAIL ME</a>
-                <a href="#" class="social-btn desktop-social">LINKEDIN</a>
-                <a href="#" class="social-btn desktop-social">INSTAGRAM</a>
-                
-                <!-- Mobile animated social buttons -->
-                <div class="mobile-social-container">
-                    <div class="action-wrap">
-                        <div class="backdrop"></div>
-                        <button class="action">
-                            <div class="action-icon">📧</div>
-                            <div class="action-content" data-content="Email Me"></div>
-                        </button>
+
+        <!-- Windows -->
+        <div id="about-me-window" class="window hidden">
+            <div class="window-header">
+                <span class="window-title">About Me</span>
+                <div class="window-controls">
+                    <button class="control-btn minimize">−</button>
+                    <button class="control-btn maximize">□</button>
+                    <button class="control-btn close">×</button>
+                </div>
+            </div>
+            <div class="window-content">
+                <h2>About Me</h2>
+                <p>Welcome to my personal profile! I'm a passionate developer who loves creating innovative solutions.
+                </p>
+                <ul>
+                    <li>Full-stack Developer</li>
+                    <li>UI/UX Enthusiast</li>
+                    <li>Problem Solver</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="contact-window" class="window hidden">
+            <div class="window-header">
+                <span class="window-title">Contact</span>
+                <div class="window-controls">
+                    <button class="control-btn minimize">−</button>
+                    <button class="control-btn maximize">□</button>
+                    <button class="control-btn close">×</button>
+                </div>
+            </div>
+            <div class="window-content">
+                <h2>Get In Touch</h2>
+                <div class="contact-info">
+                    <p><strong>Email:</strong> [email]@example.com</p>
+                    <p><strong>Phone:</strong> [phone_number]</p>
+                    <p><strong>Location:</strong> [address]</p>
+                    <p><strong>LinkedIn:</strong> linkedin.com/in/[name]</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="projects-window" class="window hidden">
+            <div class="window-header">
+                <span class="window-title">Projects</span>
+                <div class="window-controls">
+                    <button class="control-btn minimize">−</button>
+                    <button class="control-btn maximize">□</button>
+                    <button class="control-btn close">×</button>
+                </div>
+            </div>
+            <div class="window-content">
+                <h2>My Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3>Portfolio Website</h3>
+                        <p>A responsive personal portfolio built with HTML, CSS, and JavaScript</p>
+                        <span class="tech-stack">HTML • CSS • JavaScript</span>
                     </div>
-                    
-                    <div class="action-wrap">
-                        <div class="backdrop"></div>
-                        <button class="action">
-                            <div class="action-icon">💼</div>
-                            <div class="action-content" data-content="LinkedIn"></div>
-                        </button>
+                    <div class="project-card">
+                        <h3>Task Manager App</h3>
+                        <p>A full-stack task management application with user authentication</p>
+                        <span class="tech-stack">React • Node.js • MongoDB</span>
                     </div>
-                    
-                    <div class="action-wrap">
-                        <div class="backdrop"></div>
-                        <button class="action">
-                            <div class="action-icon">📷</div>
-                            <div class="action-content" data-content="Instagram"></div>
-                        </button>
+                    <div class="project-card">
+                        <h3>Weather Dashboard</h3>
+                        <p>Real-time weather application with location-based forecasts</p>
+                        <span class="tech-stack">Vue.js • API Integration</span>
                     </div>
                 </div>
             </div>
-        </footer>
-    </main>
+        </div>
+
+        <!-- Taskbar -->
+        <div class="taskbar">
+            <div class="start-button">
+                <span>⊞ Start</span>
+            </div>
+            <div class="taskbar-apps">
+                <!-- Running apps will appear here -->
+            </div>
+            <div class="system-tray">
+                <span class="time" id="current-time"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
-</html><script
->
-document.addEventListener('DOMContentLoaded', function() {
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobile-menu');
-    
-    hamburger.addEventListener('click', function() {
-        hamburger.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
-        document.body.classList.toggle('menu-open');
-    });
-    
-    // Close menu when clicking on a link
-    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            hamburger.classList.remove('active');
-            mobileMenu.classList.remove('active');
-            document.body.classList.remove('menu-open');
-        });
-    });
-});
-</script>
+
+</html>
