@@ -1,17 +1,138 @@
+class TextScramble {
+    constructor(el) {
+        this.el = el;
+        this.chars = '!<>-_\\/[]{}—=+*^?#________';
+        this.update = this.update.bind(this);
+    }
+
+    setText(newText) {
+        const oldText = this.el.innerText;
+        const length = Math.max(oldText.length, newText.length);
+        const promise = new Promise((resolve) => this.resolve = resolve);
+        this.queue = [];
+        for (let i = 0; i < length; i++) {
+            const from = oldText[i] || '';
+            const to = newText[i] || '';
+            const start = Math.floor(Math.random() * 40);
+            const end = start + Math.floor(Math.random() * 40);
+            this.queue.push({ from, to, start, end });
+        }
+        cancelAnimationFrame(this.frameRequest);
+        this.frame = 0;
+        this.update();
+        return promise;
+    }
+
+    update() {
+        let output = '';
+        let complete = 0;
+        for (let i = 0, n = this.queue.length; i < n; i++) {
+            let { from, to, start, end, char } = this.queue[i];
+            if (this.frame >= end) {
+                complete++;
+                output += to;
+            } else if (this.frame >= start) {
+                if (!char || Math.random() < 0.28) {
+                    char = this.randomChar();
+                    this.queue[i].char = char;
+                }
+                output += `<span class="dud">${char}</span>`;
+            } else {
+                output += from;
+            }
+        }
+        this.el.innerHTML = output;
+        if (complete === this.queue.length) {
+            this.resolve();
+        } else {
+            this.frameRequest = requestAnimationFrame(this.update);
+            this.frame++;
+        }
+    }
+
+    randomChar() {
+        return this.chars[Math.floor(Math.random() * this.chars.length)];
+    }
+}
+
 class WindowsDesktop {
     constructor() {
         this.windows = new Map();
         this.zIndex = 100;
+        this.textScramble = null;
         this.init();
     }
 
     init() {
+        this.showLoadingScreen();
         this.setupEventListeners();
         this.updateTime();
         this.setupWindowDragging();
         
         // Update time every second
         setInterval(() => this.updateTime(), 1000);
+    }
+
+    showLoadingScreen() {
+        // Hide loading screen after 3 seconds
+        setTimeout(() => {
+            const loadingScreen = document.getElementById('loadingScreen');
+            if (loadingScreen) {
+                loadingScreen.classList.add('fade-out');
+                // Remove from DOM after fade animation
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    // Start desktop text animation after loading screen is hidden
+                    this.initDesktopTextAnimation();
+                }, 500);
+            }
+        }, 3000);
+    }
+
+    initDesktopTextAnimation() {
+        console.log('Initializing desktop text animation...');
+        const textElement = document.querySelector('.text-scramble');
+        console.log('Text element found:', textElement);
+        
+        if (textElement) {
+            this.textScramble = new TextScramble(textElement);
+            console.log('TextScramble created:', this.textScramble);
+            
+            // Start immediately with first phrase
+            setTimeout(() => {
+                this.startTextAnimation();
+            }, 100);
+        } else {
+            console.error('Text element not found!');
+        }
+    }
+
+    startTextAnimation() {
+        console.log('Starting text animation...');
+        const phrases = [
+            'Aman Kumar',
+            'AI Innovator',
+            'Data Science Enthusiast',
+            'Robotics Explorer',
+            'Versatile Developer'
+        ];
+
+        let counter = 0;
+        const next = () => {
+            if (this.textScramble) {
+                console.log('Setting text to:', phrases[counter]);
+                this.textScramble.setText(phrases[counter]).then(() => {
+                    console.log('Text animation completed for:', phrases[counter]);
+                    setTimeout(next, 2000);
+                });
+                counter = (counter + 1) % phrases.length;
+            } else {
+                console.error('TextScramble not available');
+            }
+        };
+
+        // Start the animation
+        next();
     }
 
     setupEventListeners() {
@@ -233,37 +354,56 @@ class WindowsDesktop {
         let startX, startY, startLeft, startTop;
         let dragTimeout = null;
 
-        document.addEventListener('mousedown', (e) => {
-            const icon = e.target.closest('.icon');
+        // Helper function to get coordinates from mouse or touch event
+        const getEventCoords = (e) => {
+            if (e.touches && e.touches.length > 0) {
+                return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            }
+            return { x: e.clientX, y: e.clientY };
+        };
+
+        // Helper function to start dragging
+        const startDrag = (e, icon) => {
             if (icon && !isDraggingIcon) {
-                // Set a timeout to distinguish between click and drag
+                e.preventDefault(); // Prevent default touch behavior
+                
+                // Set a timeout to distinguish between click/tap and drag
                 dragTimeout = setTimeout(() => {
                     isDraggingIcon = true;
                     currentIcon = icon;
                     currentIcon.classList.add('dragging');
                     
-                    startX = e.clientX;
-                    startY = e.clientY;
+                    const coords = getEventCoords(e);
+                    startX = coords.x;
+                    startY = coords.y;
                     startLeft = parseInt(currentIcon.style.left) || 0;
                     startTop = parseInt(currentIcon.style.top) || 0;
                 }, 150);
             }
-        });
+        };
 
-        document.addEventListener('mousemove', (e) => {
+        // Helper function to handle dragging
+        const handleDrag = (e) => {
             if (isDraggingIcon && currentIcon) {
-                const deltaX = e.clientX - startX;
-                const deltaY = e.clientY - startY;
+                e.preventDefault(); // Prevent scrolling on mobile
                 
-                const newLeft = Math.max(0, Math.min(window.innerWidth - 80, startLeft + deltaX));
-                const newTop = Math.max(0, Math.min(window.innerHeight - 120, startTop + deltaY));
+                const coords = getEventCoords(e);
+                const deltaX = coords.x - startX;
+                const deltaY = coords.y - startY;
+                
+                const iconWidth = currentIcon.offsetWidth || 80;
+                const iconHeight = currentIcon.offsetHeight || 100;
+                
+                const newLeft = Math.max(0, Math.min(window.innerWidth - iconWidth, startLeft + deltaX));
+                const newTop = Math.max(0, Math.min(window.innerHeight - iconHeight, startTop + deltaY));
                 
                 currentIcon.style.left = `${newLeft}px`;
                 currentIcon.style.top = `${newTop}px`;
             }
-        });
+        };
 
-        document.addEventListener('mouseup', (e) => {
+        // Helper function to end dragging
+        const endDrag = (e) => {
             if (dragTimeout) {
                 clearTimeout(dragTimeout);
                 dragTimeout = null;
@@ -274,12 +414,52 @@ class WindowsDesktop {
                 isDraggingIcon = false;
                 currentIcon = null;
             }
+        };
+
+        // Mouse events for desktop
+        document.addEventListener('mousedown', (e) => {
+            const icon = e.target.closest('.icon');
+            if (icon) {
+                startDrag(e, icon);
+            }
         });
 
-        // Prevent drag from interfering with double-click
+        document.addEventListener('mousemove', handleDrag);
+        document.addEventListener('mouseup', endDrag);
+
+        // Touch events for mobile
+        document.addEventListener('touchstart', (e) => {
+            const icon = e.target.closest('.icon');
+            if (icon) {
+                startDrag(e, icon);
+            }
+        }, { passive: false });
+
+        document.addEventListener('touchmove', handleDrag, { passive: false });
+        document.addEventListener('touchend', endDrag);
+        document.addEventListener('touchcancel', endDrag);
+
+        // Prevent drag from interfering with double-click/tap
         document.addEventListener('dragstart', (e) => {
             if (e.target.closest('.icon')) {
                 e.preventDefault();
+            }
+        });
+
+        // Handle double-tap for mobile (since dblclick doesn't work well on mobile)
+        let lastTapTime = 0;
+        document.addEventListener('touchend', (e) => {
+            const icon = e.target.closest('.icon');
+            if (icon && !isDraggingIcon) {
+                const currentTime = new Date().getTime();
+                const tapLength = currentTime - lastTapTime;
+                
+                if (tapLength < 500 && tapLength > 0) {
+                    // Double tap detected
+                    const appName = icon.dataset.app;
+                    this.openWindow(appName);
+                }
+                lastTapTime = currentTime;
             }
         });
     }

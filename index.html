@@ -6,10 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Windows Desktop</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:100" rel="stylesheet">
 </head>
 
 <body>
     <div class="desktop">
+        <!-- Loading Animation -->
+        <div class="loading-screen" id="loadingScreen">
+            <div class="ai-matrix-loader">
+                <div class="digit">0</div>
+                <div class="digit">1</div>
+                <div class="digit">0</div>
+                <div class="digit">1</div>
+                <div class="digit">1</div>
+                <div class="digit">0</div>
+                <div class="digit">0</div>
+                <div class="digit">1</div>
+                <div class="glow"></div>
+            </div>
+            <div class="loading-text">Loading Desktop...</div>
+        </div>
+
+        <!-- Central Text Animation -->
+        <div class="desktop-center">
+            <div class="text-scramble"></div>
+        </div>
+
         <!-- Desktop Icons -->
         <div class="desktop-icons">
             <div class="icon" data-app="about-me" style="top: 20px; left: 20px;">
